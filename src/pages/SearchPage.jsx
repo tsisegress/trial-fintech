@@ -1,7 +1,4 @@
 import { useMemo, useState } from "react";
-import MatchScore from "../components/MatchScore";
-import SearchBar from "../components/SearchBar";
-import useSearch from "../hooks/useSearch";
 
 const RESULT_POOL = [
   {
@@ -66,6 +63,34 @@ const RESULT_POOL = [
   },
 ];
 
+function SearchInput({ value, onChange }) {
+  return (
+    <div
+      style={{
+        border: "1px solid rgba(30,151,242,0.32)",
+        borderRadius: 12,
+        background: "rgba(196,199,242,0.04)",
+        padding: "10px 12px",
+      }}
+    >
+      <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="Try: seed fintech investors in India with operator background"
+        style={{
+          width: "100%",
+          border: "none",
+          background: "transparent",
+          color: "#c4c7f2",
+          fontFamily: "'Syne', sans-serif",
+          fontSize: 14,
+          outline: "none",
+        }}
+      />
+    </div>
+  );
+}
+
 function ResultCard({ item, onOpen }) {
   return (
     <article
@@ -81,7 +106,10 @@ function ResultCard({ item, onOpen }) {
           <div style={{ fontFamily: "'Marcellus', serif", fontSize: 25, color: "#c4c7f2" }}>{item.name}</div>
           <div style={{ fontSize: 13, color: "rgba(196,199,242,0.58)", marginTop: 2 }}>{item.summary}</div>
         </div>
-        <MatchScore value={item.similarity} label="SIMILARITY" />
+        <div style={{ textAlign: "right" }}>
+          <div style={{ color: "#53e3a6", fontWeight: 700, fontSize: 23 }}>{item.similarity}%</div>
+          <div style={{ color: "rgba(196,199,242,0.45)", fontSize: 10, letterSpacing: "0.09em" }}>SIMILARITY</div>
+        </div>
       </div>
 
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
@@ -165,46 +193,17 @@ export default function SearchPage({ onNavigate }) {
   const [query, setQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-  const [remoteResults, setRemoteResults] = useState([]);
-  const { runSearch, loading: searchLoading, error: searchError } = useSearch();
 
   const normalized = query.trim().toLowerCase();
-  const sourceResults = remoteResults.length > 0 ? remoteResults : RESULT_POOL;
 
   const results = useMemo(() => {
-    return sourceResults
-      .filter((item) => {
-        const matchesType = typeFilter === "All" || item.type === typeFilter;
-        const searchable = `${item.name} ${item.summary} ${item.sector} ${item.region} ${item.stage}`.toLowerCase();
-        const matchesQuery = !normalized || searchable.includes(normalized);
-        return matchesType && matchesQuery;
-      })
-      .sort((a, b) => b.similarity - a.similarity);
-  }, [normalized, typeFilter, sourceResults]);
-
-  const handleSemanticSearch = async () => {
-    try {
-      const list = await runSearch({ query, type: typeFilter });
-      if (Array.isArray(list) && list.length > 0) {
-        setRemoteResults(
-          list.map((row, i) => ({
-            id: row.id || `remote-${i}`,
-            name: row.name || row.title || "Untitled",
-            type: row.type || "Startup",
-            sector: row.sector || "Fintech",
-            region: row.region || "India",
-            stage: row.stage || "Seed",
-            similarity: Number(row.similarity || row.score || 85),
-            summary: row.summary || row.oneLiner || "No summary available.",
-            reasoning:
-              Array.isArray(row.reasoning) && row.reasoning.length > 0
-                ? row.reasoning
-                : ["Fetched from backend semantic search."],
-          })),
-        );
-      }
-    } catch (_) {}
-  };
+    return RESULT_POOL.filter((item) => {
+      const matchesType = typeFilter === "All" || item.type === typeFilter;
+      const searchable = `${item.name} ${item.summary} ${item.sector} ${item.region} ${item.stage}`.toLowerCase();
+      const matchesQuery = !normalized || searchable.includes(normalized);
+      return matchesType && matchesQuery;
+    }).sort((a, b) => b.similarity - a.similarity);
+  }, [normalized, typeFilter]);
 
   return (
     <div
@@ -257,28 +256,8 @@ export default function SearchPage({ onNavigate }) {
 
       <main style={{ maxWidth: 1080, margin: "0 auto", padding: "20px 20px 30px", display: "grid", gap: 14 }}>
         <div style={{ display: "grid", gap: 10 }}>
-          <SearchBar value={query} onChange={setQuery} placeholder="Try: seed fintech investors in India with operator background" />
-          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <SegmentedControl value={typeFilter} onChange={setTypeFilter} />
-            <button
-              type="button"
-              onClick={handleSemanticSearch}
-              style={{
-                border: "none",
-                background: "linear-gradient(135deg, #091eca, #1e97f2)",
-                color: "#e8eeff",
-                borderRadius: 8,
-                padding: "8px 12px",
-                fontSize: 12,
-                fontWeight: 700,
-                cursor: "pointer",
-              }}
-            >
-              Run AI search
-            </button>
-          </div>
-          {searchLoading && <div style={{ fontSize: 12, color: "rgba(196,199,242,0.54)" }}>Querying backend semantic search...</div>}
-          {searchError && <div style={{ fontSize: 12, color: "#f2ba1e" }}>Live search unavailable. Showing local demo results.</div>}
+          <SearchInput value={query} onChange={setQuery} />
+          <SegmentedControl value={typeFilter} onChange={setTypeFilter} />
           <div style={{ fontSize: 12, color: "rgba(196,199,242,0.54)" }}>{results.length} results</div>
         </div>
 
@@ -335,7 +314,9 @@ export default function SearchPage({ onNavigate }) {
               </button>
             </div>
 
-            <div style={{ fontSize: 12, color: "rgba(196,199,242,0.45)", letterSpacing: "0.09em" }}>AI RATIONALE</div>
+            <div style={{ fontSize: 12, color: "rgba(196,199,242,0.45)", letterSpacing: "0.09em" }}>
+              AI RATIONALE
+            </div>
             <div style={{ display: "grid", gap: 8 }}>
               {selected.reasoning.map((point) => (
                 <div key={point} style={{ color: "rgba(196,199,242,0.85)", fontSize: 14 }}>

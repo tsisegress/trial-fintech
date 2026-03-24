@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { fetchMatches, sendMatchAction } from "../services/matchService.js";
+import { fetchMatches, sendMatchAction } from "../services/matchService";
 
 export default function useMatches(initialPayload = null) {
   const [matches, setMatches] = useState([]);

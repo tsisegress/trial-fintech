@@ -1,4 +1,4 @@
-import { api } from "./api.js";
+import { api } from "./api";
 
 export async function fetchMatches(payload) {
   return api.post("/api/match", payload);
