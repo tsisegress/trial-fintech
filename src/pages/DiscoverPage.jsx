@@ -1,7 +1,4 @@
 import { useMemo, useRef, useState } from "react";
-import EntityTag from "../components/EntityTag";
-import MatchScore from "../components/MatchScore";
-import { MatchEntityType } from "../types/match";
 
 const MOCK_MATCHES = [
   {
@@ -73,7 +70,30 @@ const FILTER_OPTIONS = {
   region: ["All", "India", "Southeast Asia"],
 };
 
+function Badge({ children }) {
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        padding: "4px 10px",
+        borderRadius: 999,
+        fontSize: 11,
+        letterSpacing: "0.04em",
+        color: "rgba(196,199,242,0.78)",
+        border: "1px solid rgba(196,199,242,0.2)",
+        background: "rgba(196,199,242,0.06)",
+      }}
+    >
+      {children}
+    </span>
+  );
+}
+
 function MatchCard({ match, onSkip, onLike, onExplain }) {
+  const scoreColor =
+    match.score >= 94 ? "#53e3a6" : match.score >= 90 ? "#1e97f2" : "#f2ba1e";
+
   return (
     <article
       style={{
@@ -90,14 +110,17 @@ function MatchCard({ match, onSkip, onLike, onExplain }) {
           <div style={{ fontFamily: "'Marcellus', serif", fontSize: 30, color: "#c4c7f2" }}>{match.name}</div>
           <div style={{ color: "rgba(196,199,242,0.62)", fontSize: 14 }}>{match.oneLiner}</div>
         </div>
-        <MatchScore value={match.score} />
+        <div style={{ textAlign: "right" }}>
+          <div style={{ color: scoreColor, fontWeight: 700, fontSize: 26 }}>{match.score}%</div>
+          <div style={{ color: "rgba(196,199,242,0.45)", fontSize: 11, letterSpacing: "0.08em" }}>MATCH SCORE</div>
+        </div>
       </div>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 18 }}>
-        <EntityTag>{match.type === MatchEntityType.STARTUP ? "Startup" : "Investor"}</EntityTag>
-        <EntityTag>{match.sector}</EntityTag>
-        <EntityTag>{match.stage}</EntityTag>
-        <EntityTag>{match.region}</EntityTag>
+        <Badge>{match.type === "startup" ? "Startup" : "Investor"}</Badge>
+        <Badge>{match.sector}</Badge>
+        <Badge>{match.stage}</Badge>
+        <Badge>{match.region}</Badge>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 18 }}>

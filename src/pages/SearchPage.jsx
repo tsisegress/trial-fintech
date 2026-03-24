@@ -1,6 +1,4 @@
 import { useMemo, useState } from "react";
-import MatchScore from "../components/MatchScore";
-import SearchBar from "../components/SearchBar";
 
 const RESULT_POOL = [
   {
@@ -65,6 +63,34 @@ const RESULT_POOL = [
   },
 ];
 
+function SearchInput({ value, onChange }) {
+  return (
+    <div
+      style={{
+        border: "1px solid rgba(30,151,242,0.32)",
+        borderRadius: 12,
+        background: "rgba(196,199,242,0.04)",
+        padding: "10px 12px",
+      }}
+    >
+      <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="Try: seed fintech investors in India with operator background"
+        style={{
+          width: "100%",
+          border: "none",
+          background: "transparent",
+          color: "#c4c7f2",
+          fontFamily: "'Syne', sans-serif",
+          fontSize: 14,
+          outline: "none",
+        }}
+      />
+    </div>
+  );
+}
+
 function ResultCard({ item, onOpen }) {
   return (
     <article
@@ -80,7 +106,10 @@ function ResultCard({ item, onOpen }) {
           <div style={{ fontFamily: "'Marcellus', serif", fontSize: 25, color: "#c4c7f2" }}>{item.name}</div>
           <div style={{ fontSize: 13, color: "rgba(196,199,242,0.58)", marginTop: 2 }}>{item.summary}</div>
         </div>
-        <MatchScore value={item.similarity} label="SIMILARITY" />
+        <div style={{ textAlign: "right" }}>
+          <div style={{ color: "#53e3a6", fontWeight: 700, fontSize: 23 }}>{item.similarity}%</div>
+          <div style={{ color: "rgba(196,199,242,0.45)", fontSize: 10, letterSpacing: "0.09em" }}>SIMILARITY</div>
+        </div>
       </div>
 
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
@@ -227,7 +256,7 @@ export default function SearchPage({ onNavigate }) {
 
       <main style={{ maxWidth: 1080, margin: "0 auto", padding: "20px 20px 30px", display: "grid", gap: 14 }}>
         <div style={{ display: "grid", gap: 10 }}>
-          <SearchBar value={query} onChange={setQuery} placeholder="Try: seed fintech investors in India with operator background" />
+          <SearchInput value={query} onChange={setQuery} />
           <SegmentedControl value={typeFilter} onChange={setTypeFilter} />
           <div style={{ fontSize: 12, color: "rgba(196,199,242,0.54)" }}>{results.length} results</div>
         </div>
