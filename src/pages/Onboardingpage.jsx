@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BrandMark from "../components/BrandMark";
 
 const SECTORS = [
   "Fintech", "SaaS", "HealthTech", "EdTech", "CleanTech",
@@ -551,20 +552,7 @@ export default function OnboardingPage({ onNavigate }) {
         padding: "0 56px", display: "flex", alignItems: "center",
         justifyContent: "space-between", height: "64px",
       }}>
-        <div
-          onClick={() => onNavigate?.("landing")}
-          style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}
-        >
-          <div style={{
-            width: "28px", height: "28px",
-            background: "linear-gradient(135deg, #091eca, #1e97f2)",
-            borderRadius: "7px",
-            display: "flex", alignItems: "center", justifyContent: "center",
-          }}>
-            <span style={{ color: "#fff", fontSize: "14px", fontFamily: "'Marcellus', serif" }}>F</span>
-          </div>
-          <span style={{ fontFamily: "'Marcellus', serif", fontSize: "18px", color: "#c4c7f2" }}>Fintech</span>
-        </div>
+        <BrandMark onClick={() => onNavigate?.("landing")} />
         {screen === "form" && (
           <span style={{ fontSize: "12px", color: "rgba(196,199,242,0.3)", fontWeight: 600, letterSpacing: "0.1em" }}>
             {role === "founder" ? "FOUNDER ONBOARDING" : "INVESTOR ONBOARDING"}
