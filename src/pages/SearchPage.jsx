@@ -1,7 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import MatchScore from "../components/MatchScore";
 import SearchBar from "../components/SearchBar";
 import useSearch from "../hooks/useSearch";
+import { normalizeSearchResults } from "../utils/normalizers";
 
 const RESULT_POOL = [
   {
@@ -166,7 +167,7 @@ export default function SearchPage({ onNavigate }) {
   const [typeFilter, setTypeFilter] = useState("All");
   const [selected, setSelected] = useState(null);
   const [remoteResults, setRemoteResults] = useState([]);
-  const { runSearch, loading: searchLoading, error: searchError } = useSearch();
+  const { runSearch, loading: searchLoading, error: searchError, cancelSearch } = useSearch();
 
   const normalized = query.trim().toLowerCase();
   const sourceResults = remoteResults.length > 0 ? remoteResults : RESULT_POOL;
@@ -185,72 +186,34 @@ export default function SearchPage({ onNavigate }) {
   const handleSemanticSearch = async () => {
     try {
       const list = await runSearch({ query, type: typeFilter });
-      if (Array.isArray(list) && list.length > 0) {
-        setRemoteResults(
-          list.map((row, i) => ({
-            id: row.id || `remote-${i}`,
-            name: row.name || row.title || "Untitled",
-            type: row.type || "Startup",
-            sector: row.sector || "Fintech",
-            region: row.region || "India",
-            stage: row.stage || "Seed",
-            similarity: Number(row.similarity || row.score || 85),
-            summary: row.summary || row.oneLiner || "No summary available.",
-            reasoning:
-              Array.isArray(row.reasoning) && row.reasoning.length > 0
-                ? row.reasoning
-                : ["Fetched from backend semantic search."],
-          })),
-        );
-      }
+      const mapped = normalizeSearchResults(list);
+      if (mapped.length > 0) setRemoteResults(mapped);
     } catch (_) {}
   };
 
+  useEffect(() => {
+    if (query.trim().length < 3) return undefined;
+
+    const timer = window.setTimeout(() => {
+      handleSemanticSearch();
+    }, 450);
+
+    return () => {
+      window.clearTimeout(timer);
+      cancelSearch();
+    };
+  }, [query, typeFilter]);
+
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#03030d",
-        color: "#c4c7f2",
-        fontFamily: "'Syne', sans-serif",
-      }}
-    >
+    <div style={{ minHeight: "100vh", background: "#03030d", color: "#c4c7f2", fontFamily: "'Syne', sans-serif" }}>
       <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-      <header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 12,
-          backdropFilter: "blur(10px)",
-          borderBottom: "1px solid rgba(30,151,242,0.25)",
-          background: "rgba(3,3,13,0.93)",
-          padding: "13px 20px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: 12,
-        }}
-      >
+      <header style={{ position: "sticky", top: 0, zIndex: 12, backdropFilter: "blur(10px)", borderBottom: "1px solid rgba(30,151,242,0.25)", background: "rgba(3,3,13,0.93)", padding: "13px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
         <div>
           <div style={{ fontSize: 11, color: "#1e97f2", letterSpacing: "0.2em", fontWeight: 700 }}>SEARCH</div>
           <div style={{ fontFamily: "'Marcellus', serif", fontSize: 27 }}>Personalized semantic search</div>
         </div>
-        <button
-          type="button"
-          onClick={() => onNavigate?.("discover")}
-          style={{
-            border: "1px solid rgba(196,199,242,0.2)",
-            background: "rgba(196,199,242,0.06)",
-            color: "rgba(196,199,242,0.86)",
-            borderRadius: 8,
-            padding: "9px 12px",
-            fontSize: 12,
-            letterSpacing: "0.06em",
-            fontWeight: 700,
-            cursor: "pointer",
-          }}
-        >
+        <button type="button" onClick={() => onNavigate?.("discover")} style={{ border: "1px solid rgba(196,199,242,0.2)", background: "rgba(196,199,242,0.06)", color: "rgba(196,199,242,0.86)", borderRadius: 8, padding: "9px 12px", fontSize: 12, letterSpacing: "0.06em", fontWeight: 700, cursor: "pointer" }}>
           Back to discover
         </button>
       </header>
@@ -260,20 +223,7 @@ export default function SearchPage({ onNavigate }) {
           <SearchBar value={query} onChange={setQuery} placeholder="Try: seed fintech investors in India with operator background" />
           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
             <SegmentedControl value={typeFilter} onChange={setTypeFilter} />
-            <button
-              type="button"
-              onClick={handleSemanticSearch}
-              style={{
-                border: "none",
-                background: "linear-gradient(135deg, #091eca, #1e97f2)",
-                color: "#e8eeff",
-                borderRadius: 8,
-                padding: "8px 12px",
-                fontSize: 12,
-                fontWeight: 700,
-                cursor: "pointer",
-              }}
-            >
+            <button type="button" onClick={handleSemanticSearch} style={{ border: "none", background: "linear-gradient(135deg, #091eca, #1e97f2)", color: "#e8eeff", borderRadius: 8, padding: "8px 12px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
               Run AI search
             </button>
           </div>
@@ -290,47 +240,14 @@ export default function SearchPage({ onNavigate }) {
       </main>
 
       {selected && (
-        <div
-          role="dialog"
-          style={{
-            position: "fixed",
-            inset: 0,
-            background: "rgba(0,0,0,0.6)",
-            display: "grid",
-            placeItems: "center",
-            padding: 20,
-            zIndex: 30,
-          }}
-        >
-          <div
-            style={{
-              width: "min(620px, 100%)",
-              borderRadius: 14,
-              border: "1px solid rgba(30,151,242,0.45)",
-              background: "#050617",
-              padding: 18,
-              display: "grid",
-              gap: 12,
-            }}
-          >
+        <div role="dialog" style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", display: "grid", placeItems: "center", padding: 20, zIndex: 30 }}>
+          <div style={{ width: "min(620px, 100%)", borderRadius: 14, border: "1px solid rgba(30,151,242,0.45)", background: "#050617", padding: 18, display: "grid", gap: 12 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
               <div>
                 <div style={{ fontFamily: "'Marcellus', serif", fontSize: 28 }}>{selected.name}</div>
                 <div style={{ fontSize: 13, color: "rgba(196,199,242,0.6)" }}>{selected.summary}</div>
               </div>
-              <button
-                type="button"
-                onClick={() => setSelected(null)}
-                style={{
-                  border: "1px solid rgba(196,199,242,0.2)",
-                  background: "transparent",
-                  color: "rgba(196,199,242,0.85)",
-                  borderRadius: 8,
-                  padding: "6px 10px",
-                  fontSize: 12,
-                  cursor: "pointer",
-                }}
-              >
+              <button type="button" onClick={() => setSelected(null)} style={{ border: "1px solid rgba(196,199,242,0.2)", background: "transparent", color: "rgba(196,199,242,0.85)", borderRadius: 8, padding: "6px 10px", fontSize: 12, cursor: "pointer" }}>
                 Close
               </button>
             </div>
@@ -345,38 +262,10 @@ export default function SearchPage({ onNavigate }) {
             </div>
 
             <div style={{ display: "flex", justifyContent: "flex-end", gap: 8 }}>
-              <button
-                type="button"
-                onClick={() => setSelected(null)}
-                style={{
-                  border: "1px solid rgba(196,199,242,0.2)",
-                  background: "rgba(196,199,242,0.06)",
-                  color: "rgba(196,199,242,0.86)",
-                  borderRadius: 8,
-                  padding: "8px 11px",
-                  fontSize: 12,
-                  cursor: "pointer",
-                }}
-              >
+              <button type="button" onClick={() => setSelected(null)} style={{ border: "1px solid rgba(196,199,242,0.2)", background: "rgba(196,199,242,0.06)", color: "rgba(196,199,242,0.86)", borderRadius: 8, padding: "8px 11px", fontSize: 12, cursor: "pointer" }}>
                 Dismiss
               </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setSelected(null);
-                  onNavigate?.("discover");
-                }}
-                style={{
-                  border: "none",
-                  background: "linear-gradient(135deg, #091eca, #1e97f2)",
-                  color: "#e8eeff",
-                  borderRadius: 8,
-                  padding: "8px 11px",
-                  fontSize: 12,
-                  fontWeight: 700,
-                  cursor: "pointer",
-                }}
-              >
+              <button type="button" onClick={() => { setSelected(null); onNavigate?.("discover"); }} style={{ border: "none", background: "linear-gradient(135deg, #091eca, #1e97f2)", color: "#e8eeff", borderRadius: 8, padding: "8px 11px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
                 Continue in discover
               </button>
             </div>

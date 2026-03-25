@@ -3,6 +3,7 @@ import useMatches from "../hooks/useMatches";
 import EntityTag from "../components/EntityTag";
 import MatchScore from "../components/MatchScore";
 import { MatchEntityType } from "../types/match";
+import { normalizeMatches } from "../utils/normalizers";
 
 const MOCK_MATCHES = [
   {
@@ -248,7 +249,8 @@ export default function DiscoverPage({ profile, onNavigate }) {
     loadMatches({ profile })
       .then((list) => {
         if (!active) return;
-        if (Array.isArray(list) && list.length > 0) setMatchesData(list);
+        const normalized = normalizeMatches(list);
+        if (normalized.length > 0) setMatchesData(normalized);
       })
       .catch(() => {});
 
