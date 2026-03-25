@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import BrandMark from "../components/BrandMark";
 
 const STATS = [
   { value: "94%", label: "Match accuracy" },
@@ -187,19 +188,7 @@ export default function LandingPage({ onNavigate }) {
         justifyContent: "space-between",
         height: "68px",
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div style={{
-            width: "30px", height: "30px",
-            background: "linear-gradient(135deg, #091eca, #1e97f2)",
-            borderRadius: "8px",
-            display: "flex", alignItems: "center", justifyContent: "center",
-          }}>
-            <span style={{ color: "#fff", fontSize: "15px", fontFamily: "'Marcellus', serif" }}>F</span>
-          </div>
-          <span style={{ fontFamily: "'Marcellus', serif", fontSize: "20px", color: "#c4c7f2", letterSpacing: "0.04em" }}>
-            Fintech
-          </span>
-        </div>
+        <BrandMark />
 
         <div style={{ display: "flex", alignItems: "center", gap: "36px" }}>
           {["How it works", "Investors", "Founders"].map(item => (
