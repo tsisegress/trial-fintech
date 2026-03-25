@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import BrandMark from "../components/BrandMark";
 
 const COMMON_SECTORS = [
   "Fintech",
@@ -195,32 +194,6 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
       </header>
 
       <main style={{ maxWidth: 1020, margin: "0 auto", padding: "20px 20px 0", display: "grid", gap: 14 }}>
-
-        <Section title="Brand preview" subtitle="Logo + product identity used across nav bars.">
-          <div style={{ display: "grid", gap: 12 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-              <BrandMark />
-              <div style={{ fontSize: 12, color: "rgba(196,199,242,0.56)" }}>
-                Current source: <span style={{ color: "#9bd2ff" }}>/branding/fi.png</span>
-              </div>
-            </div>
-            <div
-              style={{
-                border: "1px dashed rgba(196,199,242,0.2)",
-                borderRadius: 10,
-                padding: "10px 12px",
-                background: "rgba(3,3,13,0.35)",
-                color: "rgba(196,199,242,0.68)",
-                fontSize: 12,
-                lineHeight: 1.6,
-              }}
-            >
-              Put your PNG logo file at <strong style={{ color: "#c4c7f2" }}>public/branding/fi.png</strong>. If the image is missing,
-              the app automatically falls back to the "F" mark.
-            </div>
-          </div>
-        </Section>
-
         <Section title="Identity" subtitle="Core metadata used to personalize the match engine.">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
             <Field label="Role">

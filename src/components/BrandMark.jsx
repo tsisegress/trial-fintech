@@ -1,8 +1,4 @@
-import { useState } from "react";
-
-export default function BrandMark({ onClick, logoSrc = "/branding/fi.png" }) {
-  const [imageOk, setImageOk] = useState(true);
-
+export default function BrandMark({ onClick }) {
   return (
     <div
       onClick={onClick}
@@ -20,16 +16,7 @@ export default function BrandMark({ onClick, logoSrc = "/branding/fi.png" }) {
           overflow: "hidden",
         }}
       >
-        {imageOk ? (
-          <img
-            src={logoSrc}
-            alt="Fintech"
-            onError={() => setImageOk(false)}
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        ) : (
-          <span style={{ color: "#fff", fontSize: "15px", fontFamily: "'Marcellus', serif" }}>F</span>
-        )}
+        <span style={{ color: "#fff", fontSize: "15px", fontFamily: "'Marcellus', serif" }}>F</span>
       </div>
       <span
         style={{
