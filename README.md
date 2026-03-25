@@ -24,3 +24,8 @@ public/branding/fi.png
 ```bash
 npm test
 ```
+
+
+## Roadmap
+
+See `docs/ROADMAP.md` for what is done and what remains.
