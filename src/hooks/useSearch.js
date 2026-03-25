@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { fetchSearchResults } from "../services/searchService.js";
+import { fetchSearchResults } from "../services/searchService";
 
 export default function useSearch() {
   const [results, setResults] = useState([]);
