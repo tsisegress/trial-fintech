@@ -16,8 +16,8 @@ export default function SearchBar({ value, onChange, placeholder }) {
           width: "100%",
           border: "none",
           background: "transparent",
-          color: "#eaceaa",
-          fontFamily: "'TAN Mon Cheri', serif",
+          color: "#c4c7f2",
+          fontFamily: "'Syne', sans-serif",
           fontSize: 14,
           outline: "none",
         }}

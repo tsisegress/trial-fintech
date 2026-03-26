@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import BrandMark from "../components/BrandMark";
 
 const COMMON_SECTORS = [
   "Fintech",
@@ -29,9 +28,9 @@ function Section({ title, subtitle, children }) {
         <h3
           style={{
             margin: 0,
-            fontFamily: "'Syne', sans-serif",
+            fontFamily: "'Marcellus', serif",
             fontSize: 24,
-            color: "#eaceaa",
+            color: "#c4c7f2",
             fontWeight: 400,
           }}
         >
@@ -57,10 +56,10 @@ function inputStyle() {
   return {
     background: "rgba(196,199,242,0.05)",
     border: "1px solid rgba(196,199,242,0.17)",
-    color: "#eaceaa",
+    color: "#c4c7f2",
     borderRadius: 9,
     padding: "11px 12px",
-    fontFamily: "'TAN Mon Cheri', serif",
+    fontFamily: "'Syne', sans-serif",
     fontSize: 14,
     outline: "none",
   };
@@ -79,7 +78,7 @@ function SelectTag({ label, active, onClick }) {
         padding: "8px 10px",
         fontSize: 12,
         cursor: "pointer",
-        fontFamily: "'TAN Mon Cheri', serif",
+        fontFamily: "'Syne', sans-serif",
         fontWeight: 600,
       }}
     >
@@ -130,13 +129,13 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
     <div
       style={{
         minHeight: "100vh",
-        background: "#150c0c",
-        color: "#eaceaa",
-        fontFamily: "'TAN Mon Cheri', serif",
+        background: "#03030d",
+        color: "#c4c7f2",
+        fontFamily: "'Syne', sans-serif",
         paddingBottom: 28,
       }}
     >
-      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       <header
         style={{
@@ -153,8 +152,8 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
         }}
       >
         <div>
-          <div style={{ color: "#d39858", fontSize: 11, letterSpacing: "0.18em", fontWeight: 600 }}>PROFILE</div>
-          <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 28 }}>Tune your matching persona</div>
+          <div style={{ color: "#1e97f2", fontSize: 11, letterSpacing: "0.18em", fontWeight: 600 }}>PROFILE</div>
+          <div style={{ fontFamily: "'Marcellus', serif", fontSize: 28 }}>Tune your matching persona</div>
         </div>
         <div style={{ display: "flex", gap: 10 }}>
           <button
@@ -180,7 +179,7 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
             style={{
               borderRadius: 8,
               border: "none",
-              background: "linear-gradient(135deg, #85431e, #d39858)",
+              background: "linear-gradient(135deg, #091eca, #1e97f2)",
               color: "#e8eeff",
               padding: "10px 14px",
               fontSize: 12,
@@ -195,32 +194,6 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
       </header>
 
       <main style={{ maxWidth: 1020, margin: "0 auto", padding: "20px 20px 0", display: "grid", gap: 14 }}>
-
-        <Section title="Brand preview" subtitle="Logo + product identity used across nav bars.">
-          <div style={{ display: "grid", gap: 12 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-              <BrandMark />
-              <div style={{ fontSize: 12, color: "rgba(196,199,242,0.56)" }}>
-                Current source: <span style={{ color: "#d39858" }}>/branding/fi.png</span>
-              </div>
-            </div>
-            <div
-              style={{
-                border: "1px dashed rgba(196,199,242,0.2)",
-                borderRadius: 10,
-                padding: "10px 12px",
-                background: "rgba(3,3,13,0.35)",
-                color: "rgba(196,199,242,0.68)",
-                fontSize: 12,
-                lineHeight: 1.6,
-              }}
-            >
-              Put your PNG logo file at <strong style={{ color: "#eaceaa" }}>public/branding/fi.png</strong>. If the image is missing,
-              the app automatically falls back to the "F" mark.
-            </div>
-          </div>
-        </Section>
-
         <Section title="Identity" subtitle="Core metadata used to personalize the match engine.">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
             <Field label="Role">
@@ -299,7 +272,7 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
                 value={profile.minScore}
                 onChange={(e) => setProfile((prev) => ({ ...prev, minScore: Number(e.target.value) }))}
               />
-              <div style={{ fontSize: 12, color: "#d39858", fontWeight: 700 }}>{profile.minScore}%</div>
+              <div style={{ fontSize: 12, color: "#9bd2ff", fontWeight: 700 }}>{profile.minScore}%</div>
             </Field>
           </div>
 
@@ -353,7 +326,7 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
             bottom: 20,
             background: "rgba(3,3,13,0.96)",
             border: "1px solid rgba(30,151,242,0.45)",
-            color: "#d39858",
+            color: "#9bd2ff",
             fontSize: 12,
             borderRadius: 10,
             padding: "12px 14px",

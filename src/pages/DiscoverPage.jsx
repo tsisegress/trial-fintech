@@ -1,10 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import useMatches from "../hooks/useMatches";
-import EntityTag from "../components/EntityTag";
-import MatchScore from "../components/MatchScore";
-import { MatchAction, MatchEntityType } from "../types/match";
-import { addMatchActivity, addPipelineItem, setSelectedMatchId, useMatchStore } from "../store/useMatchStore";
-import { normalizeMatches } from "../utils/normalizers";
+import { useMemo, useRef, useState } from "react";
 
 const MOCK_MATCHES = [
   {
@@ -76,7 +70,30 @@ const FILTER_OPTIONS = {
   region: ["All", "India", "Southeast Asia"],
 };
 
+function Badge({ children }) {
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        padding: "4px 10px",
+        borderRadius: 999,
+        fontSize: 11,
+        letterSpacing: "0.04em",
+        color: "rgba(196,199,242,0.78)",
+        border: "1px solid rgba(196,199,242,0.2)",
+        background: "rgba(196,199,242,0.06)",
+      }}
+    >
+      {children}
+    </span>
+  );
+}
+
 function MatchCard({ match, onSkip, onLike, onExplain }) {
+  const scoreColor =
+    match.score >= 94 ? "#53e3a6" : match.score >= 90 ? "#1e97f2" : "#f2ba1e";
+
   return (
     <article
       style={{
@@ -90,17 +107,20 @@ function MatchCard({ match, onSkip, onLike, onExplain }) {
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
         <div>
-          <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 30, color: "#eaceaa" }}>{match.name}</div>
+          <div style={{ fontFamily: "'Marcellus', serif", fontSize: 30, color: "#c4c7f2" }}>{match.name}</div>
           <div style={{ color: "rgba(196,199,242,0.62)", fontSize: 14 }}>{match.oneLiner}</div>
         </div>
-        <MatchScore value={match.score} />
+        <div style={{ textAlign: "right" }}>
+          <div style={{ color: scoreColor, fontWeight: 700, fontSize: 26 }}>{match.score}%</div>
+          <div style={{ color: "rgba(196,199,242,0.45)", fontSize: 11, letterSpacing: "0.08em" }}>MATCH SCORE</div>
+        </div>
       </div>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 18 }}>
-        <EntityTag>{match.type === MatchEntityType.STARTUP ? "Startup" : "Investor"}</EntityTag>
-        <EntityTag>{match.sector}</EntityTag>
-        <EntityTag>{match.stage}</EntityTag>
-        <EntityTag>{match.region}</EntityTag>
+        <Badge>{match.type === "startup" ? "Startup" : "Investor"}</Badge>
+        <Badge>{match.sector}</Badge>
+        <Badge>{match.stage}</Badge>
+        <Badge>{match.region}</Badge>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 18 }}>
@@ -117,7 +137,7 @@ function MatchCard({ match, onSkip, onLike, onExplain }) {
             key={tag}
             style={{
               fontSize: 11,
-              color: "#d39858",
+              color: "#9bd2ff",
               border: "1px solid rgba(30,151,242,0.35)",
               borderRadius: 6,
               padding: "4px 8px",
@@ -175,7 +195,7 @@ function ActionButton({ children, variant, ...props }) {
     border: "1px solid rgba(196,199,242,0.2)",
     padding: "10px 12px",
     cursor: "pointer",
-    fontFamily: "'TAN Mon Cheri', serif",
+    fontFamily: "'Syne', sans-serif",
     fontWeight: 600,
     letterSpacing: "0.04em",
     fontSize: 12,
@@ -185,7 +205,7 @@ function ActionButton({ children, variant, ...props }) {
     variant === "primary"
       ? {
           ...base,
-          background: "linear-gradient(135deg, #85431e, #d39858)",
+          background: "linear-gradient(135deg, #091eca, #1e97f2)",
           color: "#e6ecff",
           border: "none",
           marginLeft: "auto",
@@ -212,11 +232,11 @@ function FilterPill({ label, value, options, onChange }) {
         onChange={(e) => onChange(e.target.value)}
         style={{
           background: "rgba(196,199,242,0.06)",
-          color: "#eaceaa",
+          color: "#c4c7f2",
           border: "1px solid rgba(196,199,242,0.16)",
           borderRadius: 8,
           padding: "8px 10px",
-          fontFamily: "'TAN Mon Cheri', serif",
+          fontFamily: "'Syne', sans-serif",
           fontSize: 13,
           minWidth: 150,
         }}
@@ -241,29 +261,9 @@ export default function DiscoverPage({ profile, onNavigate }) {
   const [index, setIndex] = useState(0);
   const [toast, setToast] = useState("");
   const toastTimerRef = useRef(null);
-  const [matchesData, setMatchesData] = useState(MOCK_MATCHES);
-  const { loadMatches, loading: matchesLoading, error: matchesError, actOnMatch } = useMatches();
-  const selectedMatchId = useMatchStore((state) => state.selectedMatchId);
-  const selectedSource = useMatchStore((state) => state.selectedSource);
-
-  useEffect(() => {
-    let active = true;
-
-    loadMatches({ profile })
-      .then((list) => {
-        if (!active) return;
-        const normalized = normalizeMatches(list);
-        if (normalized.length > 0) setMatchesData(normalized);
-      })
-      .catch(() => {});
-
-    return () => {
-      active = false;
-    };
-  }, [loadMatches, profile]);
 
   const filtered = useMemo(() => {
-    return matchesData.filter((item) => {
+    return MOCK_MATCHES.filter((item) => {
       const typeLabel = item.type === "startup" ? "Startup" : "Investor";
       return (
         (filters.type === "All" || filters.type === typeLabel) &&
@@ -272,15 +272,9 @@ export default function DiscoverPage({ profile, onNavigate }) {
         (filters.region === "All" || filters.region === item.region)
       );
     });
-  }, [filters, matchesData]);
+  }, [filters]);
 
   const current = filtered[index] || null;
-
-  useEffect(() => {
-    if (!selectedMatchId || filtered.length === 0) return;
-    const targetIndex = filtered.findIndex((item) => item.id === selectedMatchId);
-    if (targetIndex >= 0) setIndex(targetIndex);
-  }, [selectedMatchId, filtered]);
 
   const moveNext = () => setIndex((prev) => (prev + 1 < filtered.length ? prev + 1 : prev));
 
@@ -294,13 +288,13 @@ export default function DiscoverPage({ profile, onNavigate }) {
     <div
       style={{
         minHeight: "100vh",
-        background: "#150c0c",
-        color: "#eaceaa",
-        fontFamily: "'TAN Mon Cheri', serif",
+        background: "#03030d",
+        color: "#c4c7f2",
+        fontFamily: "'Syne', sans-serif",
         paddingBottom: 30,
       }}
     >
-      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       <header
         style={{
@@ -317,8 +311,8 @@ export default function DiscoverPage({ profile, onNavigate }) {
         }}
       >
         <div>
-          <div style={{ fontSize: 11, color: "#d39858", letterSpacing: "0.18em", fontWeight: 600 }}>DISCOVER</div>
-          <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 28 }}>Your AI-ranked matches</div>
+          <div style={{ fontSize: 11, color: "#1e97f2", letterSpacing: "0.18em", fontWeight: 600 }}>DISCOVER</div>
+          <div style={{ fontFamily: "'Marcellus', serif", fontSize: 28 }}>Your AI-ranked matches</div>
         </div>
         <button
           type="button"
@@ -326,7 +320,7 @@ export default function DiscoverPage({ profile, onNavigate }) {
           style={{
             border: "1px solid rgba(196,199,242,0.2)",
             background: "rgba(196,199,242,0.06)",
-            color: "#eaceaa",
+            color: "#c4c7f2",
             borderRadius: 8,
             padding: "10px 14px",
             fontSize: 12,
@@ -370,94 +364,18 @@ export default function DiscoverPage({ profile, onNavigate }) {
           {filtered.length} matches for {profile?.name || "you"}
         </div>
 
-        {selectedMatchId && selectedSource === "dashboard" && current && (
-          <div
-            style={{
-              marginBottom: 14,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              border: "1px solid rgba(30,151,242,0.35)",
-              background: "rgba(30,151,242,0.12)",
-              color: "#d39858",
-              borderRadius: 999,
-              padding: "6px 12px",
-              fontSize: 12,
-              fontWeight: 600,
-            }}
-          >
-            Opened from Dashboard: {current.name}
-          </div>
-        )}
-
-        {matchesLoading && (
-          <div style={{ color: "rgba(196,199,242,0.5)", marginBottom: 10, fontSize: 12 }}>
-            Syncing latest matches from backend...
-          </div>
-        )}
-
-        {matchesError && (
-          <div style={{ color: "#f2ba1e", marginBottom: 10, fontSize: 12 }}>
-            Live match sync unavailable. Showing local demo data.
-          </div>
-        )}
-
         {current ? (
           <MatchCard
             match={current}
             onSkip={() => {
-              if (current) {
-                addMatchActivity({
-                  id: `skip-${current.id}-${Date.now()}`,
-                  title: "Skipped match",
-                  detail: current.name,
-                  tone: "warn",
-                });
-              }
-
               showToast("Skipped. Updating your ranking model.");
               moveNext();
             }}
-            onLike={async () => {
-              if (!current) return;
-
-              try {
-                await actOnMatch({ matchId: current.id, action: MatchAction.LIKE });
-              } catch (_) {}
-
-              addPipelineItem({
-                id: `pipe-${current.id}`,
-                matchId: current.id,
-                counterpart: current.name,
-                type: current.type === MatchEntityType.STARTUP ? "Startup" : "Investor",
-                stage: "Intro Requested",
-                score: current.score,
-                owner: "You",
-                eta: "2 days",
-              });
-
-              addMatchActivity({
-                id: `like-${current.id}-${Date.now()}`,
-                title: "Interest sent",
-                detail: current.name,
-                tone: "success",
-              });
-
-              setSelectedMatchId(current.id, "discover");
-              showToast("Interest sent. Added to dashboard pipeline.");
+            onLike={() => {
+              showToast("Interest sent. Opening intro workflow.");
               moveNext();
             }}
-            onExplain={() => {
-              if (current) {
-                addMatchActivity({
-                  id: `explain-${current.id}-${Date.now()}`,
-                  title: "Viewed explanation",
-                  detail: current.name,
-                  tone: "info",
-                });
-              }
-              showToast("AI explanation expanded in chat panel.");
-            }}
+            onExplain={() => showToast("AI explanation expanded in chat panel.")}
           />
         ) : (
           <div
@@ -484,7 +402,7 @@ export default function DiscoverPage({ profile, onNavigate }) {
             background: "rgba(3,3,13,0.95)",
             borderRadius: 10,
             padding: "12px 14px",
-            color: "#d39858",
+            color: "#9bd2ff",
             fontSize: 12,
           }}
         >

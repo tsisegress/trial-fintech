@@ -1,5 +1,5 @@
 export default function MatchScore({ value, label = "MATCH SCORE" }) {
-  const tone = value >= 94 ? "#d39858" : value >= 90 ? "#d39858" : "#f2ba1e";
+  const tone = value >= 94 ? "#53e3a6" : value >= 90 ? "#1e97f2" : "#f2ba1e";
 
   return (
     <div style={{ textAlign: "right" }}>

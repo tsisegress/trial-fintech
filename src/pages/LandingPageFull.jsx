@@ -166,13 +166,13 @@ export default function LandingPage({ onNavigate }) {
 
   return (
     <div style={{
-      background: "#150c0c",
-      color: "#eaceaa",
-      fontFamily: "'TAN Mon Cheri', serif",
+      background: "#03030d",
+      color: "#c4c7f2",
+      fontFamily: "'Syne', sans-serif",
       minHeight: "100vh",
       overflowX: "hidden",
     }}>
-      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       <nav style={{
         position: "fixed",
@@ -196,44 +196,27 @@ export default function LandingPage({ onNavigate }) {
               fontSize: "13px", color: "rgba(196,199,242,0.5)", cursor: "pointer",
               transition: "color 0.2s", letterSpacing: "0.03em", fontWeight: 500,
             }}
-              onMouseEnter={e => e.target.style.color = "#eaceaa"}
+              onMouseEnter={e => e.target.style.color = "#c4c7f2"}
               onMouseLeave={e => e.target.style.color = "rgba(196,199,242,0.5)"}
             >{item}</span>
           ))}
           <button
-            onClick={() => onNavigate?.("chatbot")}
-            style={{
-              background: "rgba(234,206,170,0.08)",
-              color: "#eaceaa",
-              border: "1px solid rgba(234,206,170,0.25)",
-              padding: "9px 14px",
-              borderRadius: "8px",
-              fontSize: "12px",
-              fontWeight: 600,
-              cursor: "pointer",
-              fontFamily: "'TAN Mon Cheri', serif",
-              letterSpacing: "0.04em",
-            }}
-          >
-            Chat + History
-          </button>
-          <button
             onClick={() => onNavigate?.("onboarding")}
             style={{
-              background: "#85431e",
-              color: "#eaceaa",
+              background: "#091eca",
+              color: "#c4c7f2",
               border: "none",
               padding: "9px 22px",
               borderRadius: "8px",
               fontSize: "13px",
               fontWeight: 600,
               cursor: "pointer",
-              fontFamily: "'TAN Mon Cheri', serif",
+              fontFamily: "'Syne', sans-serif",
               letterSpacing: "0.04em",
               transition: "background 0.2s",
             }}
-            onMouseEnter={e => e.target.style.background = "#d39858"}
-            onMouseLeave={e => e.target.style.background = "#85431e"}
+            onMouseEnter={e => e.target.style.background = "#1e97f2"}
+            onMouseLeave={e => e.target.style.background = "#091eca"}
           >
             Get started
           </button>
@@ -265,29 +248,29 @@ export default function LandingPage({ onNavigate }) {
             padding: "5px 14px",
             marginBottom: "36px",
           }}>
-            <div style={{ width: "6px", height: "6px", background: "#d39858", borderRadius: "50%", animation: "pulse 2s infinite" }} />
-            <span style={{ fontSize: "11px", color: "#d39858", letterSpacing: "0.12em", fontWeight: 600 }}>
+            <div style={{ width: "6px", height: "6px", background: "#1e97f2", borderRadius: "50%", animation: "pulse 2s infinite" }} />
+            <span style={{ fontSize: "11px", color: "#1e97f2", letterSpacing: "0.12em", fontWeight: 600 }}>
               AI-POWERED INVESTOR MATCHING
             </span>
           </div>
 
           <h1 style={{
-            fontFamily: "'Syne', sans-serif",
+            fontFamily: "'Marcellus', serif",
             fontSize: "clamp(56px, 8vw, 108px)",
             lineHeight: "1.0",
-            color: "#eaceaa",
+            color: "#c4c7f2",
             marginBottom: "10px",
             fontWeight: 400,
           }}>
             Capital meets
           </h1>
           <h1 style={{
-            fontFamily: "'Syne', sans-serif",
+            fontFamily: "'Marcellus', serif",
             fontSize: "clamp(56px, 8vw, 108px)",
             lineHeight: "1.0",
             marginBottom: "36px",
             fontWeight: 400,
-            background: "linear-gradient(90deg, #d39858, #85431e)",
+            background: "linear-gradient(90deg, #1e97f2, #091eca)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}>
@@ -309,20 +292,20 @@ export default function LandingPage({ onNavigate }) {
             <button
               onClick={() => onNavigate?.("onboarding")}
               style={{
-                background: "#85431e",
-                color: "#eaceaa",
+                background: "#091eca",
+                color: "#c4c7f2",
                 border: "none",
                 padding: "14px 34px",
                 borderRadius: "8px",
                 fontSize: "14px",
                 fontWeight: 600,
                 cursor: "pointer",
-                fontFamily: "'TAN Mon Cheri', serif",
+                fontFamily: "'Syne', sans-serif",
                 letterSpacing: "0.04em",
                 transition: "all 0.2s",
               }}
-              onMouseEnter={e => { e.target.style.background = "#d39858"; e.target.style.transform = "translateY(-2px)"; }}
-              onMouseLeave={e => { e.target.style.background = "#85431e"; e.target.style.transform = "translateY(0)"; }}
+              onMouseEnter={e => { e.target.style.background = "#1e97f2"; e.target.style.transform = "translateY(-2px)"; }}
+              onMouseLeave={e => { e.target.style.background = "#091eca"; e.target.style.transform = "translateY(0)"; }}
             >
               Find your match →
             </button>
@@ -334,11 +317,11 @@ export default function LandingPage({ onNavigate }) {
               borderRadius: "8px",
               fontSize: "14px",
               cursor: "pointer",
-              fontFamily: "'TAN Mon Cheri', serif",
+              fontFamily: "'Syne', sans-serif",
               letterSpacing: "0.04em",
               transition: "all 0.2s",
             }}
-              onMouseEnter={e => { e.target.style.borderColor = "#d39858"; e.target.style.color = "#eaceaa"; }}
+              onMouseEnter={e => { e.target.style.borderColor = "#1e97f2"; e.target.style.color = "#c4c7f2"; }}
               onMouseLeave={e => { e.target.style.borderColor = "rgba(9,65,202,0.3)"; e.target.style.color = "rgba(196,199,242,0.5)"; }}
             >
               See demo
@@ -359,18 +342,18 @@ export default function LandingPage({ onNavigate }) {
         }}>
           {STATS.map((s, i) => (
             <div key={i} style={{
-              background: "#150c0c",
+              background: "#03030d",
               padding: "36px 28px",
               textAlign: "center",
               transition: "background 0.2s",
             }}
               onMouseEnter={e => e.currentTarget.style.background = "#06091a"}
-              onMouseLeave={e => e.currentTarget.style.background = "#150c0c"}
+              onMouseLeave={e => e.currentTarget.style.background = "#03030d"}
             >
               <div style={{
-                fontFamily: "'Syne', sans-serif",
+                fontFamily: "'Marcellus', serif",
                 fontSize: "48px",
-                color: "#eaceaa",
+                color: "#c4c7f2",
                 lineHeight: 1,
                 marginBottom: "8px",
               }}>
@@ -393,15 +376,15 @@ export default function LandingPage({ onNavigate }) {
       <section style={{ padding: "60px 80px 100px" }}>
         <div style={{ marginBottom: "56px" }}>
           <div style={{
-            fontSize: "11px", color: "#d39858",
+            fontSize: "11px", color: "#1e97f2",
             letterSpacing: "0.2em", fontWeight: 600, marginBottom: "16px",
           }}>
             PLATFORM INTELLIGENCE
           </div>
           <h2 style={{
-            fontFamily: "'Syne', sans-serif",
+            fontFamily: "'Marcellus', serif",
             fontSize: "clamp(36px, 4vw, 56px)",
-            color: "#eaceaa",
+            color: "#c4c7f2",
             fontWeight: 400,
             lineHeight: 1.1,
           }}>
@@ -412,12 +395,12 @@ export default function LandingPage({ onNavigate }) {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(9,65,202,0.2)" }}>
           {FEATURES.map((f, i) => (
             <div key={i} style={{
-              background: "#150c0c",
+              background: "#03030d",
               padding: "40px 36px",
               transition: "background 0.2s",
             }}
               onMouseEnter={e => e.currentTarget.style.background = "#06091a"}
-              onMouseLeave={e => e.currentTarget.style.background = "#150c0c"}
+              onMouseLeave={e => e.currentTarget.style.background = "#03030d"}
             >
               <div style={{
                 fontSize: "10px", color: "rgba(196,199,242,0.25)",
@@ -426,8 +409,8 @@ export default function LandingPage({ onNavigate }) {
                 {String(i + 1).padStart(2, "0")} — {f.tag}
               </div>
               <h3 style={{
-                fontFamily: "'Syne', sans-serif",
-                fontSize: "28px", color: "#eaceaa",
+                fontFamily: "'Marcellus', serif",
+                fontSize: "28px", color: "#c4c7f2",
                 fontWeight: 400, marginBottom: "16px", lineHeight: 1.2,
               }}>
                 {f.title}
@@ -444,8 +427,8 @@ export default function LandingPage({ onNavigate }) {
                 border: "1px solid rgba(30,151,242,0.2)",
                 borderRadius: "4px", padding: "4px 10px",
               }}>
-                <div style={{ width: "5px", height: "5px", background: "#d39858", borderRadius: "50%" }} />
-                <span style={{ fontSize: "11px", color: "#d39858", fontWeight: 600, letterSpacing: "0.06em" }}>
+                <div style={{ width: "5px", height: "5px", background: "#1e97f2", borderRadius: "50%" }} />
+                <span style={{ fontSize: "11px", color: "#1e97f2", fontWeight: 600, letterSpacing: "0.06em" }}>
                   {f.metric}
                 </span>
               </div>
@@ -472,13 +455,13 @@ export default function LandingPage({ onNavigate }) {
           pointerEvents: "none",
         }} />
         <div style={{ position: "relative", zIndex: 1 }}>
-          <div style={{ fontSize: "11px", color: "#d39858", letterSpacing: "0.2em", fontWeight: 600, marginBottom: "20px" }}>
+          <div style={{ fontSize: "11px", color: "#1e97f2", letterSpacing: "0.2em", fontWeight: 600, marginBottom: "20px" }}>
             JOIN THE NETWORK
           </div>
           <h2 style={{
-            fontFamily: "'Syne', sans-serif",
+            fontFamily: "'Marcellus', serif",
             fontSize: "clamp(40px, 5vw, 68px)",
-            color: "#eaceaa", fontWeight: 400, lineHeight: 1.1, marginBottom: "20px",
+            color: "#c4c7f2", fontWeight: 400, lineHeight: 1.1, marginBottom: "20px",
           }}>
             Ready to find your match?
           </h2>
@@ -492,13 +475,13 @@ export default function LandingPage({ onNavigate }) {
             <button
               onClick={() => onNavigate?.("onboarding")}
               style={{
-                background: "#85431e", color: "#eaceaa", border: "none",
+                background: "#091eca", color: "#c4c7f2", border: "none",
                 padding: "14px 36px", borderRadius: "8px", fontSize: "14px",
-                fontWeight: 600, cursor: "pointer", fontFamily: "'TAN Mon Cheri', serif",
+                fontWeight: 600, cursor: "pointer", fontFamily: "'Syne', sans-serif",
                 letterSpacing: "0.04em", transition: "all 0.2s",
               }}
-              onMouseEnter={e => { e.target.style.background = "#d39858"; e.target.style.transform = "translateY(-2px)"; }}
-              onMouseLeave={e => { e.target.style.background = "#85431e"; e.target.style.transform = "translateY(0)"; }}
+              onMouseEnter={e => { e.target.style.background = "#1e97f2"; e.target.style.transform = "translateY(-2px)"; }}
+              onMouseLeave={e => { e.target.style.background = "#091eca"; e.target.style.transform = "translateY(0)"; }}
             >
               I'm a Founder
             </button>
@@ -508,9 +491,9 @@ export default function LandingPage({ onNavigate }) {
                 background: "transparent", color: "rgba(196,199,242,0.5)",
                 border: "1px solid rgba(9,65,202,0.3)", padding: "14px 36px",
                 borderRadius: "8px", fontSize: "14px", cursor: "pointer",
-                fontFamily: "'TAN Mon Cheri', serif", letterSpacing: "0.04em", transition: "all 0.2s",
+                fontFamily: "'Syne', sans-serif", letterSpacing: "0.04em", transition: "all 0.2s",
               }}
-              onMouseEnter={e => { e.target.style.borderColor = "#d39858"; e.target.style.color = "#eaceaa"; }}
+              onMouseEnter={e => { e.target.style.borderColor = "#1e97f2"; e.target.style.color = "#c4c7f2"; }}
               onMouseLeave={e => { e.target.style.borderColor = "rgba(9,65,202,0.3)"; e.target.style.color = "rgba(196,199,242,0.5)"; }}
             >
               I'm an Investor
@@ -524,7 +507,7 @@ export default function LandingPage({ onNavigate }) {
         padding: "28px 80px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
-        <span style={{ fontFamily: "'Syne', sans-serif", fontSize: "16px", color: "rgba(196,199,242,0.3)" }}>Fintech</span>
+        <span style={{ fontFamily: "'Marcellus', serif", fontSize: "16px", color: "rgba(196,199,242,0.3)" }}>Fintech</span>
         <span style={{ fontSize: "12px", color: "rgba(196,199,242,0.2)", letterSpacing: "0.08em", fontWeight: 600 }}>
           © 2025 · 25F3002634
         </span>

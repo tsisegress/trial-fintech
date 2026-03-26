@@ -69,13 +69,13 @@ function Tag({ label, selected, onClick }) {
       style={{
         background: selected ? "rgba(9,65,202,0.25)" : "rgba(196,199,242,0.04)",
         border: selected ? "1px solid rgba(30,151,242,0.5)" : "1px solid rgba(196,199,242,0.1)",
-        color: selected ? "#eaceaa" : "rgba(196,199,242,0.45)",
+        color: selected ? "#c4c7f2" : "rgba(196,199,242,0.45)",
         padding: "7px 14px",
         borderRadius: "6px",
         fontSize: "12px",
         fontWeight: 600,
         cursor: "pointer",
-        fontFamily: "'TAN Mon Cheri', serif",
+        fontFamily: "'Syne', sans-serif",
         letterSpacing: "0.04em",
         transition: "all 0.15s",
       }}
@@ -106,9 +106,9 @@ function Input({ label, placeholder, value, onChange, type = "text" }) {
           border: focused ? "1px solid rgba(30,151,242,0.6)" : "1px solid rgba(196,199,242,0.1)",
           borderRadius: "8px",
           padding: "12px 16px",
-          color: "#eaceaa",
+          color: "#c4c7f2",
           fontSize: "14px",
-          fontFamily: "'TAN Mon Cheri', serif",
+          fontFamily: "'Syne', sans-serif",
           outline: "none",
           transition: "border 0.2s",
           width: "100%",
@@ -138,9 +138,9 @@ function TextArea({ label, placeholder, value, onChange }) {
           border: focused ? "1px solid rgba(30,151,242,0.6)" : "1px solid rgba(196,199,242,0.1)",
           borderRadius: "8px",
           padding: "12px 16px",
-          color: "#eaceaa",
+          color: "#c4c7f2",
           fontSize: "14px",
-          fontFamily: "'TAN Mon Cheri', serif",
+          fontFamily: "'Syne', sans-serif",
           outline: "none",
           transition: "border 0.2s",
           width: "100%",
@@ -160,7 +160,7 @@ function StepDots({ total, current }) {
           width: i === current ? "24px" : "6px",
           height: "6px",
           borderRadius: "3px",
-          background: i === current ? "#d39858" : i < current ? "rgba(30,151,242,0.4)" : "rgba(196,199,242,0.15)",
+          background: i === current ? "#1e97f2" : i < current ? "rgba(30,151,242,0.4)" : "rgba(196,199,242,0.15)",
           transition: "all 0.3s",
         }} />
       ))}
@@ -193,10 +193,10 @@ function RoleSelect({ onSelect }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", padding: "80px 40px" }}>
       <div style={{ marginBottom: "56px", textAlign: "center" }}>
-        <div style={{ fontSize: "11px", color: "#d39858", letterSpacing: "0.2em", fontWeight: 600, marginBottom: "16px" }}>
+        <div style={{ fontSize: "11px", color: "#1e97f2", letterSpacing: "0.2em", fontWeight: 600, marginBottom: "16px" }}>
           STEP 1 OF 3
         </div>
-        <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(36px, 4vw, 54px)", color: "#eaceaa", fontWeight: 400, lineHeight: 1.1, marginBottom: "12px" }}>
+        <h1 style={{ fontFamily: "'Marcellus', serif", fontSize: "clamp(36px, 4vw, 54px)", color: "#c4c7f2", fontWeight: 400, lineHeight: 1.1, marginBottom: "12px" }}>
           Who are you?
         </h1>
         <p style={{ color: "rgba(196,199,242,0.4)", fontSize: "15px", fontWeight: 400 }}>
@@ -226,11 +226,11 @@ function RoleSelect({ onSelect }) {
               <div style={{
                 position: "absolute", top: 0, left: 0, right: 0,
                 height: "2px",
-                background: "linear-gradient(90deg, #85431e, #d39858)",
+                background: "linear-gradient(90deg, #091eca, #1e97f2)",
               }} />
             )}
-            <div style={{ fontSize: "28px", marginBottom: "16px", color: "#d39858" }}>{r.icon}</div>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: "26px", color: "#eaceaa", fontWeight: 400, marginBottom: "4px" }}>
+            <div style={{ fontSize: "28px", marginBottom: "16px", color: "#1e97f2" }}>{r.icon}</div>
+            <div style={{ fontFamily: "'Marcellus', serif", fontSize: "26px", color: "#c4c7f2", fontWeight: 400, marginBottom: "4px" }}>
               {r.title}
             </div>
             <div style={{ fontSize: "12px", color: "rgba(196,199,242,0.4)", fontWeight: 600, letterSpacing: "0.06em", marginBottom: "16px" }}>
@@ -242,7 +242,7 @@ function RoleSelect({ onSelect }) {
             <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
               {r.stats.map(s => (
                 <div key={s} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  <div style={{ width: "4px", height: "4px", background: "#d39858", borderRadius: "50%" }} />
+                  <div style={{ width: "4px", height: "4px", background: "#1e97f2", borderRadius: "50%" }} />
                   <span style={{ fontSize: "11px", color: "rgba(196,199,242,0.35)", fontWeight: 600, letterSpacing: "0.06em" }}>{s}</span>
                 </div>
               ))}
@@ -330,7 +330,7 @@ function FounderForm({ onSubmit, onBack }) {
     <div style={{ maxWidth: "680px", width: "100%", margin: "0 auto", padding: "100px 40px 80px" }}>
       <button onClick={onBack} style={{
         background: "none", border: "none", color: "rgba(196,199,242,0.35)", cursor: "pointer",
-        fontSize: "13px", fontFamily: "'TAN Mon Cheri', serif", fontWeight: 600,
+        fontSize: "13px", fontFamily: "'Syne', sans-serif", fontWeight: 600,
         letterSpacing: "0.06em", marginBottom: "48px", padding: 0, display: "flex", alignItems: "center", gap: "6px",
       }}>
         ← Back
@@ -338,10 +338,10 @@ function FounderForm({ onSubmit, onBack }) {
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "40px" }}>
         <div>
-          <div style={{ fontSize: "11px", color: "#d39858", letterSpacing: "0.2em", fontWeight: 600, marginBottom: "12px" }}>
+          <div style={{ fontSize: "11px", color: "#1e97f2", letterSpacing: "0.2em", fontWeight: 600, marginBottom: "12px" }}>
             STEP {step + 2} OF 3
           </div>
-          <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "36px", color: "#eaceaa", fontWeight: 400, marginBottom: "4px" }}>
+          <h2 style={{ fontFamily: "'Marcellus', serif", fontSize: "36px", color: "#c4c7f2", fontWeight: 400, marginBottom: "4px" }}>
             {steps[step].title}
           </h2>
           <p style={{ color: "rgba(196,199,242,0.4)", fontSize: "14px" }}>{steps[step].subtitle}</p>
@@ -356,7 +356,7 @@ function FounderForm({ onSubmit, onBack }) {
           <button onClick={() => setStep(s => s - 1)} style={{
             background: "transparent", border: "1px solid rgba(196,199,242,0.1)",
             color: "rgba(196,199,242,0.5)", padding: "13px 28px", borderRadius: "8px",
-            fontSize: "14px", fontWeight: 600, cursor: "pointer", fontFamily: "'TAN Mon Cheri', serif",
+            fontSize: "14px", fontWeight: 600, cursor: "pointer", fontFamily: "'Syne', sans-serif",
             letterSpacing: "0.04em", transition: "all 0.2s",
           }}>
             Previous
@@ -365,13 +365,13 @@ function FounderForm({ onSubmit, onBack }) {
         <button
           onClick={() => step < steps.length - 1 ? setStep(s => s + 1) : onSubmit(form)}
           style={{
-            background: "#85431e", color: "#eaceaa", border: "none",
+            background: "#091eca", color: "#c4c7f2", border: "none",
             padding: "13px 32px", borderRadius: "8px", fontSize: "14px",
-            fontWeight: 600, cursor: "pointer", fontFamily: "'TAN Mon Cheri', serif",
+            fontWeight: 600, cursor: "pointer", fontFamily: "'Syne', sans-serif",
             letterSpacing: "0.04em", transition: "all 0.2s", flex: 1,
           }}
-          onMouseEnter={e => e.target.style.background = "#d39858"}
-          onMouseLeave={e => e.target.style.background = "#85431e"}
+          onMouseEnter={e => e.target.style.background = "#1e97f2"}
+          onMouseLeave={e => e.target.style.background = "#091eca"}
         >
           {step < steps.length - 1 ? "Continue →" : "Find my investors →"}
         </button>
@@ -465,7 +465,7 @@ function InvestorForm({ onSubmit, onBack }) {
     <div style={{ maxWidth: "680px", width: "100%", margin: "0 auto", padding: "100px 40px 80px" }}>
       <button onClick={onBack} style={{
         background: "none", border: "none", color: "rgba(196,199,242,0.35)", cursor: "pointer",
-        fontSize: "13px", fontFamily: "'TAN Mon Cheri', serif", fontWeight: 600,
+        fontSize: "13px", fontFamily: "'Syne', sans-serif", fontWeight: 600,
         letterSpacing: "0.06em", marginBottom: "48px", padding: 0, display: "flex", alignItems: "center", gap: "6px",
       }}>
         ← Back
@@ -473,10 +473,10 @@ function InvestorForm({ onSubmit, onBack }) {
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "40px" }}>
         <div>
-          <div style={{ fontSize: "11px", color: "#d39858", letterSpacing: "0.2em", fontWeight: 600, marginBottom: "12px" }}>
+          <div style={{ fontSize: "11px", color: "#1e97f2", letterSpacing: "0.2em", fontWeight: 600, marginBottom: "12px" }}>
             STEP {step + 2} OF 3
           </div>
-          <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "36px", color: "#eaceaa", fontWeight: 400, marginBottom: "4px" }}>
+          <h2 style={{ fontFamily: "'Marcellus', serif", fontSize: "36px", color: "#c4c7f2", fontWeight: 400, marginBottom: "4px" }}>
             {steps[step].title}
           </h2>
           <p style={{ color: "rgba(196,199,242,0.4)", fontSize: "14px" }}>{steps[step].subtitle}</p>
@@ -491,7 +491,7 @@ function InvestorForm({ onSubmit, onBack }) {
           <button onClick={() => setStep(s => s - 1)} style={{
             background: "transparent", border: "1px solid rgba(196,199,242,0.1)",
             color: "rgba(196,199,242,0.5)", padding: "13px 28px", borderRadius: "8px",
-            fontSize: "14px", fontWeight: 600, cursor: "pointer", fontFamily: "'TAN Mon Cheri', serif",
+            fontSize: "14px", fontWeight: 600, cursor: "pointer", fontFamily: "'Syne', sans-serif",
             letterSpacing: "0.04em", transition: "all 0.2s",
           }}>
             Previous
@@ -500,13 +500,13 @@ function InvestorForm({ onSubmit, onBack }) {
         <button
           onClick={() => step < steps.length - 1 ? setStep(s => s + 1) : onSubmit(form)}
           style={{
-            background: "#85431e", color: "#eaceaa", border: "none",
+            background: "#091eca", color: "#c4c7f2", border: "none",
             padding: "13px 32px", borderRadius: "8px", fontSize: "14px",
-            fontWeight: 600, cursor: "pointer", fontFamily: "'TAN Mon Cheri', serif",
+            fontWeight: 600, cursor: "pointer", fontFamily: "'Syne', sans-serif",
             letterSpacing: "0.04em", transition: "all 0.2s", flex: 1,
           }}
-          onMouseEnter={e => e.target.style.background = "#d39858"}
-          onMouseLeave={e => e.target.style.background = "#85431e"}
+          onMouseEnter={e => e.target.style.background = "#1e97f2"}
+          onMouseLeave={e => e.target.style.background = "#091eca"}
         >
           {step < steps.length - 1 ? "Continue →" : "Find my startups →"}
         </button>
@@ -530,14 +530,14 @@ export default function OnboardingPage({ onNavigate }) {
 
   return (
     <div style={{
-      background: "#150c0c",
-      color: "#eaceaa",
-      fontFamily: "'TAN Mon Cheri', serif",
+      background: "#03030d",
+      color: "#c4c7f2",
+      fontFamily: "'Syne', sans-serif",
       minHeight: "100vh",
       position: "relative",
       overflowX: "hidden",
     }}>
-      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       <div style={{
         position: "fixed", inset: 0, pointerEvents: "none",
