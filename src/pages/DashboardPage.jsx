@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { setSelectedMatchId, useMatchStore } from "../store/useMatchStore";
 
 const KPI_CARDS = [
   { label: "Active Matches", value: "128", delta: "+18 this week" },
@@ -72,9 +71,9 @@ function Card({ children }) {
   return (
     <section
       style={{
-        border: "1px solid rgba(234,206,170,0.14)",
+        border: "1px solid rgba(196,199,242,0.14)",
         borderRadius: 14,
-        background: "rgba(234,206,170,0.03)",
+        background: "rgba(196,199,242,0.03)",
         padding: 16,
       }}
     >
@@ -87,15 +86,15 @@ function Kpi({ label, value, delta }) {
   return (
     <div
       style={{
-        border: "1px solid rgba(234,206,170,0.13)",
+        border: "1px solid rgba(196,199,242,0.13)",
         borderRadius: 12,
         background: "rgba(3,3,13,0.35)",
         padding: 14,
       }}
     >
-      <div style={{ fontSize: 11, color: "rgba(234,206,170,0.47)", letterSpacing: "0.11em", fontWeight: 600 }}>{label.toUpperCase()}</div>
-      <div style={{ fontFamily: "'Syne', sans-serif", color: "#eaceaa", fontSize: 31, marginTop: 4 }}>{value}</div>
-      <div style={{ fontSize: 12, color: "#d39858", marginTop: 3 }}>{delta}</div>
+      <div style={{ fontSize: 11, color: "rgba(196,199,242,0.47)", letterSpacing: "0.11em", fontWeight: 600 }}>{label.toUpperCase()}</div>
+      <div style={{ fontFamily: "'Marcellus', serif", color: "#c4c7f2", fontSize: 31, marginTop: 4 }}>{value}</div>
+      <div style={{ fontSize: 12, color: "#53e3a6", marginTop: 3 }}>{delta}</div>
     </div>
   );
 }
@@ -103,12 +102,12 @@ function Kpi({ label, value, delta }) {
 function StagePill({ stage }) {
   const tone =
     stage === "Meeting Scheduled"
-      ? { border: "rgba(83,227,166,0.5)", bg: "rgba(83,227,166,0.16)", color: "#d39858" }
+      ? { border: "rgba(83,227,166,0.5)", bg: "rgba(83,227,166,0.16)", color: "#53e3a6" }
       : stage === "Intro Requested"
-        ? { border: "rgba(211,152,88,0.5)", bg: "rgba(211,152,88,0.16)", color: "#d39858" }
+        ? { border: "rgba(30,151,242,0.5)", bg: "rgba(30,151,242,0.16)", color: "#9bd2ff" }
         : stage === "AI Review"
           ? { border: "rgba(242,186,30,0.5)", bg: "rgba(242,186,30,0.16)", color: "#ffd891" }
-          : { border: "rgba(234,206,170,0.3)", bg: "rgba(234,206,170,0.08)", color: "rgba(234,206,170,0.8)" };
+          : { border: "rgba(196,199,242,0.3)", bg: "rgba(196,199,242,0.08)", color: "rgba(196,199,242,0.8)" };
 
   return (
     <span
@@ -129,29 +128,19 @@ function StagePill({ stage }) {
 }
 
 export default function DashboardPage({ onNavigate }) {
-  const storedPipeline = useMatchStore((state) => state.pipeline || []);
-  const activity = useMatchStore((state) => state.activity || []);
-
-  const bestPipeline = useMemo(() => {
-    const merged = [...storedPipeline, ...PIPELINE_ROWS].reduce((acc, row) => {
-      if (!acc.find((item) => item.id === row.id)) acc.push(row);
-      return acc;
-    }, []);
-
-    return merged.sort((a, b) => b.score - a.score);
-  }, [storedPipeline]);
+  const bestPipeline = useMemo(() => [...PIPELINE_ROWS].sort((a, b) => b.score - a.score), []);
 
   return (
     <div
       style={{
         minHeight: "100vh",
-        background: "#150c0c",
-        color: "#eaceaa",
-        fontFamily: "'TAN Mon Cheri', serif",
+        background: "#03030d",
+        color: "#c4c7f2",
+        fontFamily: "'Syne', sans-serif",
         paddingBottom: 28,
       }}
     >
-      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       <header
         style={{
@@ -160,7 +149,7 @@ export default function DashboardPage({ onNavigate }) {
           zIndex: 20,
           background: "rgba(3,3,13,0.93)",
           backdropFilter: "blur(10px)",
-          borderBottom: "1px solid rgba(211,152,88,0.24)",
+          borderBottom: "1px solid rgba(30,151,242,0.24)",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -169,17 +158,17 @@ export default function DashboardPage({ onNavigate }) {
         }}
       >
         <div>
-          <div style={{ fontSize: 11, color: "#d39858", letterSpacing: "0.18em", fontWeight: 700 }}>DASHBOARD</div>
-          <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 28 }}>Command center</div>
+          <div style={{ fontSize: 11, color: "#1e97f2", letterSpacing: "0.18em", fontWeight: 700 }}>DASHBOARD</div>
+          <div style={{ fontFamily: "'Marcellus', serif", fontSize: 28 }}>Command center</div>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
           <button
             type="button"
             onClick={() => onNavigate?.("search")}
             style={{
-              border: "1px solid rgba(234,206,170,0.2)",
-              background: "rgba(234,206,170,0.06)",
-              color: "rgba(234,206,170,0.85)",
+              border: "1px solid rgba(196,199,242,0.2)",
+              background: "rgba(196,199,242,0.06)",
+              color: "rgba(196,199,242,0.85)",
               borderRadius: 8,
               padding: "9px 11px",
               fontSize: 12,
@@ -195,7 +184,7 @@ export default function DashboardPage({ onNavigate }) {
             onClick={() => onNavigate?.("discover")}
             style={{
               border: "none",
-              background: "linear-gradient(135deg, #85431e, #d39858)",
+              background: "linear-gradient(135deg, #091eca, #1e97f2)",
               color: "#e8eeff",
               borderRadius: 8,
               padding: "9px 11px",
@@ -222,8 +211,8 @@ export default function DashboardPage({ onNavigate }) {
         <div style={{ display: "grid", gap: 14, gridTemplateColumns: "minmax(0, 2fr) minmax(0, 1fr)" }}>
           <Card>
             <div style={{ marginBottom: 10 }}>
-              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 25 }}>Live pipeline</div>
-              <div style={{ fontSize: 13, color: "rgba(234,206,170,0.52)" }}>Prioritized by fit score and workflow stage.</div>
+              <div style={{ fontFamily: "'Marcellus', serif", fontSize: 25 }}>Live pipeline</div>
+              <div style={{ fontSize: 13, color: "rgba(196,199,242,0.52)" }}>Prioritized by fit score and workflow stage.</div>
             </div>
 
             <div style={{ overflowX: "auto" }}>
@@ -242,11 +231,11 @@ export default function DashboardPage({ onNavigate }) {
                         key={title}
                         style={{
                           textAlign: "left",
-                          borderBottom: "1px solid rgba(234,206,170,0.15)",
+                          borderBottom: "1px solid rgba(196,199,242,0.15)",
                           padding: "10px 10px 9px 0",
                           fontSize: 11,
                           letterSpacing: "0.1em",
-                          color: "rgba(234,206,170,0.46)",
+                          color: "rgba(196,199,242,0.46)",
                         }}
                       >
                         {title.toUpperCase()}
@@ -257,22 +246,22 @@ export default function DashboardPage({ onNavigate }) {
                 <tbody>
                   {bestPipeline.map((row) => (
                     <tr key={row.id}>
-                      <td style={{ borderBottom: "1px solid rgba(234,206,170,0.08)", padding: "12px 10px 12px 0", fontWeight: 600 }}>
+                      <td style={{ borderBottom: "1px solid rgba(196,199,242,0.08)", padding: "12px 10px 12px 0", fontWeight: 600 }}>
                         {row.counterpart}
                       </td>
-                      <td style={{ borderBottom: "1px solid rgba(234,206,170,0.08)", padding: "12px 10px 12px 0", color: "rgba(234,206,170,0.84)" }}>
+                      <td style={{ borderBottom: "1px solid rgba(196,199,242,0.08)", padding: "12px 10px 12px 0", color: "rgba(196,199,242,0.84)" }}>
                         {row.type}
                       </td>
-                      <td style={{ borderBottom: "1px solid rgba(234,206,170,0.08)", padding: "12px 10px 12px 0" }}>
+                      <td style={{ borderBottom: "1px solid rgba(196,199,242,0.08)", padding: "12px 10px 12px 0" }}>
                         <StagePill stage={row.stage} />
                       </td>
-                      <td style={{ borderBottom: "1px solid rgba(234,206,170,0.08)", padding: "12px 10px 12px 0", color: "#d39858", fontWeight: 700 }}>
+                      <td style={{ borderBottom: "1px solid rgba(196,199,242,0.08)", padding: "12px 10px 12px 0", color: "#53e3a6", fontWeight: 700 }}>
                         {row.score}%
                       </td>
-                      <td style={{ borderBottom: "1px solid rgba(234,206,170,0.08)", padding: "12px 10px 12px 0", color: "rgba(234,206,170,0.84)" }}>
+                      <td style={{ borderBottom: "1px solid rgba(196,199,242,0.08)", padding: "12px 10px 12px 0", color: "rgba(196,199,242,0.84)" }}>
                         {row.owner}
                       </td>
-                      <td style={{ borderBottom: "1px solid rgba(234,206,170,0.08)", padding: "12px 0 12px 0", color: "rgba(234,206,170,0.84)" }}>
+                      <td style={{ borderBottom: "1px solid rgba(196,199,242,0.08)", padding: "12px 0 12px 0", color: "rgba(196,199,242,0.84)" }}>
                         {row.eta}
                       </td>
                     </tr>
@@ -285,73 +274,41 @@ export default function DashboardPage({ onNavigate }) {
           <div style={{ display: "grid", gap: 14 }}>
             <Card>
               <div style={{ marginBottom: 10 }}>
-                <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 23 }}>Market intelligence</div>
-                <div style={{ fontSize: 12, color: "rgba(234,206,170,0.52)" }}>News weighted by likely portfolio impact.</div>
+                <div style={{ fontFamily: "'Marcellus', serif", fontSize: 23 }}>Market intelligence</div>
+                <div style={{ fontSize: 12, color: "rgba(196,199,242,0.52)" }}>News weighted by likely portfolio impact.</div>
               </div>
               <div style={{ display: "grid", gap: 10 }}>
                 {NEWS_FEED.map((item) => (
                   <div
                     key={item.id}
                     style={{
-                      border: "1px solid rgba(234,206,170,0.12)",
+                      border: "1px solid rgba(196,199,242,0.12)",
                       borderRadius: 10,
                       padding: "10px 11px",
                       background: "rgba(3,3,13,0.35)",
                     }}
                   >
-                    <div style={{ color: "rgba(234,206,170,0.86)", fontSize: 13, lineHeight: 1.4 }}>{item.title}</div>
+                    <div style={{ color: "rgba(196,199,242,0.86)", fontSize: 13, lineHeight: 1.4 }}>{item.title}</div>
                     <div style={{ marginTop: 7, display: "flex", justifyContent: "space-between", fontSize: 11 }}>
-                      <span style={{ color: "rgba(234,206,170,0.5)" }}>{item.source}</span>
-                      <span style={{ color: item.impact === "High" ? "#f2ba1e" : "#d39858" }}>{item.impact} impact</span>
+                      <span style={{ color: "rgba(196,199,242,0.5)" }}>{item.source}</span>
+                      <span style={{ color: item.impact === "High" ? "#f2ba1e" : "#9bd2ff" }}>{item.impact} impact</span>
                     </div>
                   </div>
                 ))}
               </div>
             </Card>
 
-
-            <Card>
-              <div style={{ marginBottom: 10 }}>
-                <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 23 }}>Recent activity</div>
-                <div style={{ fontSize: 12, color: "rgba(234,206,170,0.52)" }}>Actions from discover/search flows.</div>
-              </div>
-              <div style={{ display: "grid", gap: 8 }}>
-                {activity.length === 0 ? (
-                  <div style={{ fontSize: 12, color: "rgba(234,206,170,0.48)" }}>No actions yet. Swipe in Discover to populate this feed.</div>
-                ) : (
-                  activity.slice(0, 6).map((event) => (
-                    <div
-                      key={event.id}
-                      style={{
-                        border: "1px solid rgba(234,206,170,0.12)",
-                        borderRadius: 10,
-                        padding: "9px 10px",
-                        background: "rgba(3,3,13,0.35)",
-                      }}
-                    >
-                      <div style={{ color: "rgba(234,206,170,0.9)", fontSize: 13 }}>{event.title}</div>
-                      <div style={{ color: "rgba(234,206,170,0.58)", fontSize: 12 }}>{event.detail}</div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </Card>
-
             <Card>
               <div style={{ marginBottom: 9 }}>
-                <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 23 }}>Actions</div>
+                <div style={{ fontFamily: "'Marcellus', serif", fontSize: 23 }}>Actions</div>
               </div>
               <div style={{ display: "grid", gap: 9 }}>
                 <button
                   type="button"
-                  onClick={() => {
-                    const top = bestPipeline[0];
-                    if (top?.matchId) setSelectedMatchId(top.matchId, "dashboard");
-                    onNavigate?.("discover");
-                  }}
+                  onClick={() => onNavigate?.("discover")}
                   style={{
                     border: "none",
-                    background: "linear-gradient(135deg, #85431e, #d39858)",
+                    background: "linear-gradient(135deg, #091eca, #1e97f2)",
                     color: "#e7eeff",
                     borderRadius: 8,
                     padding: "10px 12px",
@@ -366,9 +323,9 @@ export default function DashboardPage({ onNavigate }) {
                   type="button"
                   onClick={() => onNavigate?.("search")}
                   style={{
-                    border: "1px solid rgba(234,206,170,0.2)",
-                    background: "rgba(234,206,170,0.06)",
-                    color: "rgba(234,206,170,0.86)",
+                    border: "1px solid rgba(196,199,242,0.2)",
+                    background: "rgba(196,199,242,0.06)",
+                    color: "rgba(196,199,242,0.86)",
                     borderRadius: 8,
                     padding: "10px 12px",
                     fontSize: 12,

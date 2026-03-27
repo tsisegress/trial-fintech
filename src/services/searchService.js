@@ -1,5 +1,5 @@
-import { api } from "./api.js";
+import { api } from "./api";
 
-export async function fetchSearchResults(payload, options = {}) {
-  return api.post("/api/search", payload, options);
+export async function fetchSearchResults(payload) {
+  return api.post("/api/search", payload);
 }

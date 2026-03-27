@@ -5,16 +5,21 @@ import LandingPage from "./pages/LandingPageFull";
 import OnboardingPage from "./pages/Onboardingpage";
 import ProfilePage from "./pages/ProfilePage";
 import SearchPage from "./pages/SearchPage";
-import ChatBotPage from "./pages/ChatBotPage";
-import { setUserProfile, useUserStore } from "./store/useUserStore";
 
 export default function App() {
   const [route, setRoute] = useState("landing");
-  const profile = useUserStore((state) => state);
+  const [profile, setProfile] = useState({
+    role: "founder",
+    name: "",
+    fullName: "",
+    email: "",
+    orgName: "",
+    sectors: ["Fintech", "AI/ML"],
+  });
 
   const navigate = (next, payload) => {
     if (payload && typeof payload === "object") {
-      setUserProfile(payload);
+      setProfile((prev) => ({ ...prev, ...payload }));
     }
     setRoute(next);
   };
@@ -25,7 +30,6 @@ export default function App() {
   if (route === "profile") return <ProfilePage initialProfile={profile} onNavigate={navigate} />;
   if (route === "search") return <SearchPage onNavigate={navigate} />;
   if (route === "dashboard") return <DashboardPage onNavigate={navigate} />;
-  if (route === "chatbot") return <ChatBotPage onNavigate={navigate} />;
 
   return <LandingPage onNavigate={navigate} />;
 }
