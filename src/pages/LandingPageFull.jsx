@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import BrandMark from "../components/BrandMark";
 
 const STATS = [
   { value: "94%", label: "Match accuracy" },
@@ -165,20 +166,20 @@ export default function LandingPage({ onNavigate }) {
 
   return (
     <div style={{
-      background: "#03030d",
-      color: "#c4c7f2",
-      fontFamily: "'Syne', sans-serif",
+      background: "#150c0c",
+      color: "#eaceaa",
+      fontFamily: "'TAN Mon Cheri', serif",
       minHeight: "100vh",
       overflowX: "hidden",
     }}>
-      <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       <nav style={{
         position: "fixed",
         top: 0, left: 0, right: 0,
         zIndex: 100,
         background: scrollY > 40 ? "rgba(3,3,13,0.95)" : "transparent",
-        borderBottom: scrollY > 40 ? "1px solid rgba(9,65,202,0.25)" : "none",
+        borderBottom: scrollY > 40 ? "1px solid rgba(133,67,30,0.25)" : "none",
         backdropFilter: scrollY > 40 ? "blur(12px)" : "none",
         transition: "all 0.35s",
         padding: "0 56px",
@@ -187,47 +188,52 @@ export default function LandingPage({ onNavigate }) {
         justifyContent: "space-between",
         height: "68px",
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div style={{
-            width: "30px", height: "30px",
-            background: "linear-gradient(135deg, #091eca, #1e97f2)",
-            borderRadius: "8px",
-            display: "flex", alignItems: "center", justifyContent: "center",
-          }}>
-            <span style={{ color: "#fff", fontSize: "15px", fontFamily: "'Marcellus', serif" }}>F</span>
-          </div>
-          <span style={{ fontFamily: "'Marcellus', serif", fontSize: "20px", color: "#c4c7f2", letterSpacing: "0.04em" }}>
-            Fintech
-          </span>
-        </div>
+        <BrandMark />
 
         <div style={{ display: "flex", alignItems: "center", gap: "36px" }}>
           {["How it works", "Investors", "Founders"].map(item => (
             <span key={item} style={{
-              fontSize: "13px", color: "rgba(196,199,242,0.5)", cursor: "pointer",
+              fontSize: "13px", color: "rgba(234,206,170,0.5)", cursor: "pointer",
               transition: "color 0.2s", letterSpacing: "0.03em", fontWeight: 500,
             }}
-              onMouseEnter={e => e.target.style.color = "#c4c7f2"}
-              onMouseLeave={e => e.target.style.color = "rgba(196,199,242,0.5)"}
+              onMouseEnter={e => e.target.style.color = "#eaceaa"}
+              onMouseLeave={e => e.target.style.color = "rgba(234,206,170,0.5)"}
             >{item}</span>
           ))}
           <button
+            onClick={() => onNavigate?.("chatbot")}
+            style={{
+              background: "rgba(234,206,170,0.08)",
+              color: "#eaceaa",
+              border: "1px solid rgba(234,206,170,0.25)",
+              padding: "9px 14px",
+              borderRadius: "8px",
+              fontSize: "12px",
+              fontWeight: 600,
+              cursor: "pointer",
+              fontFamily: "'TAN Mon Cheri', serif",
+              letterSpacing: "0.04em",
+            }}
+          >
+            Chat + History
+          </button>
+          <button
             onClick={() => onNavigate?.("onboarding")}
             style={{
-              background: "#091eca",
-              color: "#c4c7f2",
+              background: "#85431e",
+              color: "#eaceaa",
               border: "none",
               padding: "9px 22px",
               borderRadius: "8px",
               fontSize: "13px",
               fontWeight: 600,
               cursor: "pointer",
-              fontFamily: "'Syne', sans-serif",
+              fontFamily: "'TAN Mon Cheri', serif",
               letterSpacing: "0.04em",
               transition: "background 0.2s",
             }}
-            onMouseEnter={e => e.target.style.background = "#1e97f2"}
-            onMouseLeave={e => e.target.style.background = "#091eca"}
+            onMouseEnter={e => e.target.style.background = "#d39858"}
+            onMouseLeave={e => e.target.style.background = "#85431e"}
           >
             Get started
           </button>
@@ -240,48 +246,48 @@ export default function LandingPage({ onNavigate }) {
         <div style={{
           position: "absolute", top: "25%", right: "10%",
           width: "520px", height: "520px",
-          background: "radial-gradient(circle, rgba(9,65,202,0.1) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(133,67,30,0.1) 0%, transparent 70%)",
           borderRadius: "50%", pointerEvents: "none",
         }} />
         <div style={{
           position: "absolute", bottom: "15%", left: "3%",
           width: "280px", height: "280px",
-          background: "radial-gradient(circle, rgba(30,151,242,0.06) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(211,152,88,0.06) 0%, transparent 70%)",
           borderRadius: "50%", pointerEvents: "none",
         }} />
 
         <div style={{ position: "relative", zIndex: 2, padding: "140px 80px 80px", maxWidth: "860px" }}>
           <div style={{
             display: "inline-flex", alignItems: "center", gap: "8px",
-            background: "rgba(9,65,202,0.1)",
-            border: "1px solid rgba(9,65,202,0.3)",
+            background: "rgba(133,67,30,0.1)",
+            border: "1px solid rgba(133,67,30,0.3)",
             borderRadius: "20px",
             padding: "5px 14px",
             marginBottom: "36px",
           }}>
-            <div style={{ width: "6px", height: "6px", background: "#1e97f2", borderRadius: "50%", animation: "pulse 2s infinite" }} />
-            <span style={{ fontSize: "11px", color: "#1e97f2", letterSpacing: "0.12em", fontWeight: 600 }}>
+            <div style={{ width: "6px", height: "6px", background: "#d39858", borderRadius: "50%", animation: "pulse 2s infinite" }} />
+            <span style={{ fontSize: "11px", color: "#d39858", letterSpacing: "0.12em", fontWeight: 600 }}>
               AI-POWERED INVESTOR MATCHING
             </span>
           </div>
 
           <h1 style={{
-            fontFamily: "'Marcellus', serif",
+            fontFamily: "'Syne', sans-serif",
             fontSize: "clamp(56px, 8vw, 108px)",
             lineHeight: "1.0",
-            color: "#c4c7f2",
+            color: "#eaceaa",
             marginBottom: "10px",
             fontWeight: 400,
           }}>
             Capital meets
           </h1>
           <h1 style={{
-            fontFamily: "'Marcellus', serif",
+            fontFamily: "'Syne', sans-serif",
             fontSize: "clamp(56px, 8vw, 108px)",
             lineHeight: "1.0",
             marginBottom: "36px",
             fontWeight: 400,
-            background: "linear-gradient(90deg, #1e97f2, #091eca)",
+            background: "linear-gradient(90deg, #d39858, #85431e)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}>
@@ -290,7 +296,7 @@ export default function LandingPage({ onNavigate }) {
 
           <p style={{
             fontSize: "16px",
-            color: "rgba(196,199,242,0.5)",
+            color: "rgba(234,206,170,0.5)",
             lineHeight: 1.8,
             maxWidth: "480px",
             marginBottom: "52px",
@@ -303,37 +309,37 @@ export default function LandingPage({ onNavigate }) {
             <button
               onClick={() => onNavigate?.("onboarding")}
               style={{
-                background: "#091eca",
-                color: "#c4c7f2",
+                background: "#85431e",
+                color: "#eaceaa",
                 border: "none",
                 padding: "14px 34px",
                 borderRadius: "8px",
                 fontSize: "14px",
                 fontWeight: 600,
                 cursor: "pointer",
-                fontFamily: "'Syne', sans-serif",
+                fontFamily: "'TAN Mon Cheri', serif",
                 letterSpacing: "0.04em",
                 transition: "all 0.2s",
               }}
-              onMouseEnter={e => { e.target.style.background = "#1e97f2"; e.target.style.transform = "translateY(-2px)"; }}
-              onMouseLeave={e => { e.target.style.background = "#091eca"; e.target.style.transform = "translateY(0)"; }}
+              onMouseEnter={e => { e.target.style.background = "#d39858"; e.target.style.transform = "translateY(-2px)"; }}
+              onMouseLeave={e => { e.target.style.background = "#85431e"; e.target.style.transform = "translateY(0)"; }}
             >
               Find your match →
             </button>
             <button style={{
               background: "transparent",
-              color: "rgba(196,199,242,0.5)",
-              border: "1px solid rgba(9,65,202,0.3)",
+              color: "rgba(234,206,170,0.5)",
+              border: "1px solid rgba(133,67,30,0.3)",
               padding: "14px 28px",
               borderRadius: "8px",
               fontSize: "14px",
               cursor: "pointer",
-              fontFamily: "'Syne', sans-serif",
+              fontFamily: "'TAN Mon Cheri', serif",
               letterSpacing: "0.04em",
               transition: "all 0.2s",
             }}
-              onMouseEnter={e => { e.target.style.borderColor = "#1e97f2"; e.target.style.color = "#c4c7f2"; }}
-              onMouseLeave={e => { e.target.style.borderColor = "rgba(9,65,202,0.3)"; e.target.style.color = "rgba(196,199,242,0.5)"; }}
+              onMouseEnter={e => { e.target.style.borderColor = "#d39858"; e.target.style.color = "#eaceaa"; }}
+              onMouseLeave={e => { e.target.style.borderColor = "rgba(133,67,30,0.3)"; e.target.style.color = "rgba(234,206,170,0.5)"; }}
             >
               See demo
             </button>
@@ -346,25 +352,25 @@ export default function LandingPage({ onNavigate }) {
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
           gap: "1px",
-          background: "rgba(9,65,202,0.2)",
-          border: "1px solid rgba(9,65,202,0.2)",
+          background: "rgba(133,67,30,0.2)",
+          border: "1px solid rgba(133,67,30,0.2)",
           borderRadius: "12px",
           overflow: "hidden",
         }}>
           {STATS.map((s, i) => (
             <div key={i} style={{
-              background: "#03030d",
+              background: "#150c0c",
               padding: "36px 28px",
               textAlign: "center",
               transition: "background 0.2s",
             }}
               onMouseEnter={e => e.currentTarget.style.background = "#06091a"}
-              onMouseLeave={e => e.currentTarget.style.background = "#03030d"}
+              onMouseLeave={e => e.currentTarget.style.background = "#150c0c"}
             >
               <div style={{
-                fontFamily: "'Marcellus', serif",
+                fontFamily: "'Syne', sans-serif",
                 fontSize: "48px",
-                color: "#c4c7f2",
+                color: "#eaceaa",
                 lineHeight: 1,
                 marginBottom: "8px",
               }}>
@@ -372,7 +378,7 @@ export default function LandingPage({ onNavigate }) {
               </div>
               <div style={{
                 fontSize: "11px",
-                color: "rgba(196,199,242,0.3)",
+                color: "rgba(234,206,170,0.3)",
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
                 fontWeight: 600,
@@ -387,15 +393,15 @@ export default function LandingPage({ onNavigate }) {
       <section style={{ padding: "60px 80px 100px" }}>
         <div style={{ marginBottom: "56px" }}>
           <div style={{
-            fontSize: "11px", color: "#1e97f2",
+            fontSize: "11px", color: "#d39858",
             letterSpacing: "0.2em", fontWeight: 600, marginBottom: "16px",
           }}>
             PLATFORM INTELLIGENCE
           </div>
           <h2 style={{
-            fontFamily: "'Marcellus', serif",
+            fontFamily: "'Syne', sans-serif",
             fontSize: "clamp(36px, 4vw, 56px)",
-            color: "#c4c7f2",
+            color: "#eaceaa",
             fontWeight: 400,
             lineHeight: 1.1,
           }}>
@@ -403,43 +409,43 @@ export default function LandingPage({ onNavigate }) {
           </h2>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(9,65,202,0.2)" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(133,67,30,0.2)" }}>
           {FEATURES.map((f, i) => (
             <div key={i} style={{
-              background: "#03030d",
+              background: "#150c0c",
               padding: "40px 36px",
               transition: "background 0.2s",
             }}
               onMouseEnter={e => e.currentTarget.style.background = "#06091a"}
-              onMouseLeave={e => e.currentTarget.style.background = "#03030d"}
+              onMouseLeave={e => e.currentTarget.style.background = "#150c0c"}
             >
               <div style={{
-                fontSize: "10px", color: "rgba(196,199,242,0.25)",
+                fontSize: "10px", color: "rgba(234,206,170,0.25)",
                 letterSpacing: "0.2em", fontWeight: 600, marginBottom: "20px",
               }}>
                 {String(i + 1).padStart(2, "0")} — {f.tag}
               </div>
               <h3 style={{
-                fontFamily: "'Marcellus', serif",
-                fontSize: "28px", color: "#c4c7f2",
+                fontFamily: "'Syne', sans-serif",
+                fontSize: "28px", color: "#eaceaa",
                 fontWeight: 400, marginBottom: "16px", lineHeight: 1.2,
               }}>
                 {f.title}
               </h3>
               <p style={{
-                fontSize: "14px", color: "rgba(196,199,242,0.4)",
+                fontSize: "14px", color: "rgba(234,206,170,0.4)",
                 lineHeight: 1.8, marginBottom: "28px",
               }}>
                 {f.body}
               </p>
               <div style={{
                 display: "inline-flex", alignItems: "center", gap: "6px",
-                background: "rgba(30,151,242,0.06)",
-                border: "1px solid rgba(30,151,242,0.2)",
+                background: "rgba(211,152,88,0.06)",
+                border: "1px solid rgba(211,152,88,0.2)",
                 borderRadius: "4px", padding: "4px 10px",
               }}>
-                <div style={{ width: "5px", height: "5px", background: "#1e97f2", borderRadius: "50%" }} />
-                <span style={{ fontSize: "11px", color: "#1e97f2", fontWeight: 600, letterSpacing: "0.06em" }}>
+                <div style={{ width: "5px", height: "5px", background: "#d39858", borderRadius: "50%" }} />
+                <span style={{ fontSize: "11px", color: "#d39858", fontWeight: 600, letterSpacing: "0.06em" }}>
                   {f.metric}
                 </span>
               </div>
@@ -451,7 +457,7 @@ export default function LandingPage({ onNavigate }) {
       <section style={{
         margin: "0 80px 100px",
         background: "linear-gradient(135deg, #06091a 0%, #030a1f 100%)",
-        border: "1px solid rgba(9,65,202,0.25)",
+        border: "1px solid rgba(133,67,30,0.25)",
         borderRadius: "16px",
         padding: "80px",
         textAlign: "center",
@@ -462,22 +468,22 @@ export default function LandingPage({ onNavigate }) {
           position: "absolute", top: "50%", left: "50%",
           transform: "translate(-50%, -50%)",
           width: "600px", height: "600px",
-          background: "radial-gradient(circle, rgba(9,65,202,0.08) 0%, transparent 65%)",
+          background: "radial-gradient(circle, rgba(133,67,30,0.08) 0%, transparent 65%)",
           pointerEvents: "none",
         }} />
         <div style={{ position: "relative", zIndex: 1 }}>
-          <div style={{ fontSize: "11px", color: "#1e97f2", letterSpacing: "0.2em", fontWeight: 600, marginBottom: "20px" }}>
+          <div style={{ fontSize: "11px", color: "#d39858", letterSpacing: "0.2em", fontWeight: 600, marginBottom: "20px" }}>
             JOIN THE NETWORK
           </div>
           <h2 style={{
-            fontFamily: "'Marcellus', serif",
+            fontFamily: "'Syne', sans-serif",
             fontSize: "clamp(40px, 5vw, 68px)",
-            color: "#c4c7f2", fontWeight: 400, lineHeight: 1.1, marginBottom: "20px",
+            color: "#eaceaa", fontWeight: 400, lineHeight: 1.1, marginBottom: "20px",
           }}>
             Ready to find your match?
           </h2>
           <p style={{
-            color: "rgba(196,199,242,0.4)", fontSize: "15px",
+            color: "rgba(234,206,170,0.4)", fontSize: "15px",
             maxWidth: "400px", margin: "0 auto 44px", lineHeight: 1.75,
           }}>
             Whether you're raising your Series A or deploying your next fund — your match is already in the system.
@@ -486,26 +492,26 @@ export default function LandingPage({ onNavigate }) {
             <button
               onClick={() => onNavigate?.("onboarding")}
               style={{
-                background: "#091eca", color: "#c4c7f2", border: "none",
+                background: "#85431e", color: "#eaceaa", border: "none",
                 padding: "14px 36px", borderRadius: "8px", fontSize: "14px",
-                fontWeight: 600, cursor: "pointer", fontFamily: "'Syne', sans-serif",
+                fontWeight: 600, cursor: "pointer", fontFamily: "'TAN Mon Cheri', serif",
                 letterSpacing: "0.04em", transition: "all 0.2s",
               }}
-              onMouseEnter={e => { e.target.style.background = "#1e97f2"; e.target.style.transform = "translateY(-2px)"; }}
-              onMouseLeave={e => { e.target.style.background = "#091eca"; e.target.style.transform = "translateY(0)"; }}
+              onMouseEnter={e => { e.target.style.background = "#d39858"; e.target.style.transform = "translateY(-2px)"; }}
+              onMouseLeave={e => { e.target.style.background = "#85431e"; e.target.style.transform = "translateY(0)"; }}
             >
               I'm a Founder
             </button>
             <button
               onClick={() => onNavigate?.("onboarding")}
               style={{
-                background: "transparent", color: "rgba(196,199,242,0.5)",
-                border: "1px solid rgba(9,65,202,0.3)", padding: "14px 36px",
+                background: "transparent", color: "rgba(234,206,170,0.5)",
+                border: "1px solid rgba(133,67,30,0.3)", padding: "14px 36px",
                 borderRadius: "8px", fontSize: "14px", cursor: "pointer",
-                fontFamily: "'Syne', sans-serif", letterSpacing: "0.04em", transition: "all 0.2s",
+                fontFamily: "'TAN Mon Cheri', serif", letterSpacing: "0.04em", transition: "all 0.2s",
               }}
-              onMouseEnter={e => { e.target.style.borderColor = "#1e97f2"; e.target.style.color = "#c4c7f2"; }}
-              onMouseLeave={e => { e.target.style.borderColor = "rgba(9,65,202,0.3)"; e.target.style.color = "rgba(196,199,242,0.5)"; }}
+              onMouseEnter={e => { e.target.style.borderColor = "#d39858"; e.target.style.color = "#eaceaa"; }}
+              onMouseLeave={e => { e.target.style.borderColor = "rgba(133,67,30,0.3)"; e.target.style.color = "rgba(234,206,170,0.5)"; }}
             >
               I'm an Investor
             </button>
@@ -514,19 +520,19 @@ export default function LandingPage({ onNavigate }) {
       </section>
 
       <footer style={{
-        borderTop: "1px solid rgba(9,65,202,0.2)",
+        borderTop: "1px solid rgba(133,67,30,0.2)",
         padding: "28px 80px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
-        <span style={{ fontFamily: "'Marcellus', serif", fontSize: "16px", color: "rgba(196,199,242,0.3)" }}>Fintech</span>
-        <span style={{ fontSize: "12px", color: "rgba(196,199,242,0.2)", letterSpacing: "0.08em", fontWeight: 600 }}>
+        <span style={{ fontFamily: "'Syne', sans-serif", fontSize: "16px", color: "rgba(234,206,170,0.3)" }}>Fintech</span>
+        <span style={{ fontSize: "12px", color: "rgba(234,206,170,0.2)", letterSpacing: "0.08em", fontWeight: 600 }}>
           © 2025 · 25F3002634
         </span>
         <div style={{ display: "flex", gap: "24px" }}>
           {["Privacy", "Terms", "Contact"].map(l => (
-            <span key={l} style={{ fontSize: "12px", color: "rgba(196,199,242,0.25)", cursor: "pointer", transition: "color 0.2s", fontWeight: 500 }}
-              onMouseEnter={e => e.target.style.color = "rgba(196,199,242,0.7)"}
-              onMouseLeave={e => e.target.style.color = "rgba(196,199,242,0.25)"}
+            <span key={l} style={{ fontSize: "12px", color: "rgba(234,206,170,0.25)", cursor: "pointer", transition: "color 0.2s", fontWeight: 500 }}
+              onMouseEnter={e => e.target.style.color = "rgba(234,206,170,0.7)"}
+              onMouseLeave={e => e.target.style.color = "rgba(234,206,170,0.25)"}
             >{l}</span>
           ))}
         </div>
