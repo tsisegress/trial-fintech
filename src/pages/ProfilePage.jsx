@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import BrandMark from "../components/BrandMark";
 
 const COMMON_SECTORS = [
   "Fintech",
@@ -19,9 +18,9 @@ function Section({ title, subtitle, children }) {
   return (
     <section
       style={{
-        border: "1px solid rgba(234,206,169,0.14)",
+        border: "1px solid rgba(196,199,242,0.14)",
         borderRadius: 14,
-        background: "rgba(234,206,169,0.03)",
+        background: "rgba(196,199,242,0.03)",
         padding: 18,
       }}
     >
@@ -29,15 +28,15 @@ function Section({ title, subtitle, children }) {
         <h3
           style={{
             margin: 0,
-            fontFamily: "'Syne', sans-serif",
+            fontFamily: "'Marcellus', serif",
             fontSize: 24,
-            color: "#EACEA9",
+            color: "#c4c7f2",
             fontWeight: 400,
           }}
         >
           {title}
         </h3>
-        <p style={{ margin: "6px 0 0", color: "rgba(234,206,169,0.5)", fontSize: 13 }}>{subtitle}</p>
+        <p style={{ margin: "6px 0 0", color: "rgba(196,199,242,0.5)", fontSize: 13 }}>{subtitle}</p>
       </div>
       {children}
     </section>
@@ -47,7 +46,7 @@ function Section({ title, subtitle, children }) {
 function Field({ label, children }) {
   return (
     <label style={{ display: "flex", flexDirection: "column", gap: 7 }}>
-      <span style={{ fontSize: 11, color: "rgba(234,206,169,0.46)", letterSpacing: "0.12em", fontWeight: 600 }}>{label.toUpperCase()}</span>
+      <span style={{ fontSize: 11, color: "rgba(196,199,242,0.46)", letterSpacing: "0.12em", fontWeight: 600 }}>{label.toUpperCase()}</span>
       {children}
     </label>
   );
@@ -55,12 +54,12 @@ function Field({ label, children }) {
 
 function inputStyle() {
   return {
-    background: "rgba(234,206,169,0.05)",
-    border: "1px solid rgba(234,206,169,0.17)",
-    color: "#EACEA9",
+    background: "rgba(196,199,242,0.05)",
+    border: "1px solid rgba(196,199,242,0.17)",
+    color: "#c4c7f2",
     borderRadius: 9,
     padding: "11px 12px",
-    fontFamily: "'TAN Mon Cheri', serif",
+    fontFamily: "'Syne', sans-serif",
     fontSize: 14,
     outline: "none",
   };
@@ -73,13 +72,13 @@ function SelectTag({ label, active, onClick }) {
       onClick={onClick}
       style={{
         borderRadius: 8,
-        border: active ? "1px solid rgba(211,151,88,0.5)" : "1px solid rgba(234,206,169,0.2)",
-        background: active ? "rgba(211,151,88,0.2)" : "rgba(234,206,169,0.04)",
-        color: active ? "#EACEA9" : "rgba(234,206,169,0.75)",
+        border: active ? "1px solid rgba(30,151,242,0.5)" : "1px solid rgba(196,199,242,0.2)",
+        background: active ? "rgba(30,151,242,0.2)" : "rgba(196,199,242,0.04)",
+        color: active ? "#d7ecff" : "rgba(196,199,242,0.75)",
         padding: "8px 10px",
         fontSize: 12,
         cursor: "pointer",
-        fontFamily: "'TAN Mon Cheri', serif",
+        fontFamily: "'Syne', sans-serif",
         fontWeight: 600,
       }}
     >
@@ -130,13 +129,13 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
     <div
       style={{
         minHeight: "100vh",
-        background: "#150D0B",
-        color: "#EACEA9",
-        fontFamily: "'TAN Mon Cheri', serif",
+        background: "#03030d",
+        color: "#c4c7f2",
+        fontFamily: "'Syne', sans-serif",
         paddingBottom: 28,
       }}
     >
-      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       <header
         style={{
@@ -144,7 +143,7 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
           top: 0,
           zIndex: 10,
           background: "rgba(3,3,13,0.93)",
-          borderBottom: "1px solid rgba(211,151,88,0.24)",
+          borderBottom: "1px solid rgba(30,151,242,0.24)",
           backdropFilter: "blur(10px)",
           padding: "14px 22px",
           display: "flex",
@@ -153,8 +152,8 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
         }}
       >
         <div>
-          <div style={{ color: "#D39758", fontSize: 11, letterSpacing: "0.18em", fontWeight: 600 }}>PROFILE</div>
-          <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 28 }}>Tune your matching persona</div>
+          <div style={{ color: "#1e97f2", fontSize: 11, letterSpacing: "0.18em", fontWeight: 600 }}>PROFILE</div>
+          <div style={{ fontFamily: "'Marcellus', serif", fontSize: 28 }}>Tune your matching persona</div>
         </div>
         <div style={{ display: "flex", gap: 10 }}>
           <button
@@ -162,9 +161,9 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
             onClick={() => onNavigate?.("discover")}
             style={{
               borderRadius: 8,
-              border: "1px solid rgba(234,206,169,0.2)",
-              background: "rgba(234,206,169,0.06)",
-              color: "rgba(234,206,169,0.86)",
+              border: "1px solid rgba(196,199,242,0.2)",
+              background: "rgba(196,199,242,0.06)",
+              color: "rgba(196,199,242,0.86)",
               padding: "10px 12px",
               fontSize: 12,
               fontWeight: 600,
@@ -180,8 +179,8 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
             style={{
               borderRadius: 8,
               border: "none",
-              background: "linear-gradient(135deg, #85441E, #D39758)",
-              color: "#EACEA9",
+              background: "linear-gradient(135deg, #091eca, #1e97f2)",
+              color: "#e8eeff",
               padding: "10px 14px",
               fontSize: 12,
               fontWeight: 700,
@@ -195,32 +194,6 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
       </header>
 
       <main style={{ maxWidth: 1020, margin: "0 auto", padding: "20px 20px 0", display: "grid", gap: 14 }}>
-
-        <Section title="Brand preview" subtitle="Logo + product identity used across nav bars.">
-          <div style={{ display: "grid", gap: 12 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-              <BrandMark />
-              <div style={{ fontSize: 12, color: "rgba(234,206,169,0.56)" }}>
-                Current source: <span style={{ color: "#D39758" }}>/branding/fi.png</span>
-              </div>
-            </div>
-            <div
-              style={{
-                border: "1px dashed rgba(234,206,169,0.2)",
-                borderRadius: 10,
-                padding: "10px 12px",
-                background: "rgba(3,3,13,0.35)",
-                color: "rgba(234,206,169,0.68)",
-                fontSize: 12,
-                lineHeight: 1.6,
-              }}
-            >
-              Put your PNG logo file at <strong style={{ color: "#EACEA9" }}>public/branding/fi.png</strong>. If the image is missing,
-              the app automatically falls back to the "F" mark.
-            </div>
-          </div>
-        </Section>
-
         <Section title="Identity" subtitle="Core metadata used to personalize the match engine.">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
             <Field label="Role">
@@ -299,7 +272,7 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
                 value={profile.minScore}
                 onChange={(e) => setProfile((prev) => ({ ...prev, minScore: Number(e.target.value) }))}
               />
-              <div style={{ fontSize: 12, color: "#D39758", fontWeight: 700 }}>{profile.minScore}%</div>
+              <div style={{ fontSize: 12, color: "#9bd2ff", fontWeight: 700 }}>{profile.minScore}%</div>
             </Field>
           </div>
 
@@ -352,8 +325,8 @@ export default function ProfilePage({ initialProfile, onNavigate }) {
             right: 20,
             bottom: 20,
             background: "rgba(3,3,13,0.96)",
-            border: "1px solid rgba(211,151,88,0.45)",
-            color: "#D39758",
+            border: "1px solid rgba(30,151,242,0.45)",
+            color: "#9bd2ff",
             fontSize: 12,
             borderRadius: 10,
             padding: "12px 14px",
