@@ -1,32 +1,19 @@
-import test from "node:test";
-import assert from "node:assert/strict";
-import { fetchSearchResults } from "./searchService.js";
+import { describe, expect, it, vi, afterEach } from "vitest";
+import { fetchSearchResults } from "./searchService";
+import { api } from "./api";
 
-test("fetchSearchResults calls /api/search with payload", async () => {
-  const originalFetch = global.fetch;
-  let calledUrl = "";
-  let calledBody = "";
+describe("searchService", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
 
-  global.fetch = async (url, options) => {
-    calledUrl = String(url);
-    calledBody = options?.body || "";
+  it("calls /api/search with payload", async () => {
+    const spy = vi.spyOn(api, "post").mockResolvedValue({ results: [{ id: "r-1" }] });
 
-    return {
-      ok: true,
-      headers: { get: () => "application/json" },
-      json: async () => ({ results: [{ id: "r-1" }] }),
-      text: async () => "",
-    };
-  };
-
-  try {
     const payload = { query: "seed fintech india" };
     const data = await fetchSearchResults(payload);
 
-    assert.match(calledUrl, /\/api\/search$/);
-    assert.equal(calledBody, JSON.stringify(payload));
-    assert.deepEqual(data, { results: [{ id: "r-1" }] });
-  } finally {
-    global.fetch = originalFetch;
-  }
+    expect(spy).toHaveBeenCalledWith("/api/search", payload);
+    expect(data).toEqual({ results: [{ id: "r-1" }] });
+  });
 });
